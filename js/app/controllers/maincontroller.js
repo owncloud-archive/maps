@@ -1,9 +1,9 @@
 
 /**
  * ownCloud - Map app
- * 
+ *
  * @author Qingping Hou
- * 
+ *
  * @copyright 2013 Qingping Hou <qingping.hou@gmail.com>
  *
  * This library is free software; you can redistribute it and/or
@@ -23,7 +23,8 @@
 
 
 angular.module('Map').controller('MainController',
-	['$scope', '$routeParams', function ($scope, $routeParams) {
+	['$scope', '$routeParams', 'PointBusinessLayer',
+function ($scope, $routeParams, PointBusinessLayer) {
 
 	$scope.id = $routeParams.id;
 

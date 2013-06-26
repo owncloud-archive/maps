@@ -21,23 +21,31 @@
  *
  */
 
+angular.module('Map').factory('PointBusinessLayer',
+['PointModel',
+function (PointModel) {
+	var _getPointsByCollection = function (collection) {
+		return [
+			{
+				'title': 'London',
+				'coordinate': [51.505, -0.09],
+			},
+		];
+	};
 
-angular.module('Map', ['OC']).
-	config(
-		['$routeProvider', '$interpolateProvider',
-		function ($routeProvider, $interpolateProvider) {
+	var _getCollection = function () {
+		return [
+			{
+				'title': 'favorite',
+			},
+			{
+				'title': 'friends\' home',
+			},
+		];
+	};
 
-	$routeProvider.when('/', {
-		templateUrl: 'main.html',
-		controller: 'MainController'
-	}).when('/:id', {
-		templateUrl: 'main.html',
-		controller: 'MainController'
-	}).otherwise({
-		redirectTo: '/'
-	});
-
-	// because twig already uses {{}}
-	$interpolateProvider.startSymbol('[[');
-	$interpolateProvider.endSymbol(']]');
+	return {
+		getPointsByCollection: _getPointsByCollection,
+		getCollection: _getCollection,
+	};
 }]);

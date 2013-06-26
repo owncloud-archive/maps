@@ -21,23 +21,9 @@
  *
  */
 
-
-angular.module('Map', ['OC']).
-	config(
-		['$routeProvider', '$interpolateProvider',
-		function ($routeProvider, $interpolateProvider) {
-
-	$routeProvider.when('/', {
-		templateUrl: 'main.html',
-		controller: 'MainController'
-	}).when('/:id', {
-		templateUrl: 'main.html',
-		controller: 'MainController'
-	}).otherwise({
-		redirectTo: '/'
-	});
-
-	// because twig already uses {{}}
-	$interpolateProvider.startSymbol('[[');
-	$interpolateProvider.endSymbol(']]');
+angular.module('Map').factory('PointModel',
+[
+function () {
+	return {
+	};
 }]);

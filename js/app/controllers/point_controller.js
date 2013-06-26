@@ -22,22 +22,13 @@
  */
 
 
-angular.module('Map', ['OC']).
-	config(
-		['$routeProvider', '$interpolateProvider',
-		function ($routeProvider, $interpolateProvider) {
+angular.module('Map').controller('PointController',
+	['$scope', 'PointBusinessLayer',
+function ($scope, PointBusinessLayer) {
 
-	$routeProvider.when('/', {
-		templateUrl: 'main.html',
-		controller: 'MainController'
-	}).when('/:id', {
-		templateUrl: 'main.html',
-		controller: 'MainController'
-	}).otherwise({
-		redirectTo: '/'
-	});
+	var point_bl = PointBusinessLayer;
 
-	// because twig already uses {{}}
-	$interpolateProvider.startSymbol('[[');
-	$interpolateProvider.endSymbol(']]');
+	$scope.pointBusinessLayer = point_bl;
+	$scope.collections = point_bl.getCollection();
+
 }]);
