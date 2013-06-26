@@ -1,0 +1,25 @@
+{
+	"name": "map",
+	"version": "0.0.0",
+	"ignore": [
+		"**/.*",
+		"node_modules"
+	],
+	"dependencies": {
+		"leaflet": "*",
+		"angular-leaflet": "*"
+	},
+	"exportsOverride": {
+		"leaflet": {
+			"js": "dist/**/*.js",
+			"css": "dist/**/*.css"
+		},
+		"angular-leaflet": {
+			"js": "dist/*.js"
+		},
+		"*": {
+			"js": "**/*.js",
+			"css": "**/*.css"
+		}
+	}
+}

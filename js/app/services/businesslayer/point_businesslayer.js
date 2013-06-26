@@ -24,28 +24,24 @@
 angular.module('Map').factory('PointBusinessLayer',
 ['PointModel',
 function (PointModel) {
+	var collections = [
+		{
+			'title': 'favorite',
+		},
+		{
+			'title': 'friends\' home',
+		},
+	];
 	var _getPointsByCollection = function (collection) {
-		return [
-			{
-				'title': 'London',
-				'coordinate': [51.505, -0.09],
-			},
-		];
+		return PointModel.getByCollection(collection);
 	};
 
-	var _getCollection = function () {
-		return [
-			{
-				'title': 'favorite',
-			},
-			{
-				'title': 'friends\' home',
-			},
-		];
+	var _getCollections = function () {
+		return collections;
 	};
 
 	return {
 		getPointsByCollection: _getPointsByCollection,
-		getCollection: _getCollection,
+		getCollections: _getCollections,
 	};
 }]);

@@ -1,9 +1,9 @@
 
 /**
  * ownCloud - Map app
- * 
+ *
  * @author Qingping Hou
- * 
+ *
  * @copyright 2013 Qingping Hou <qingping.hou@gmail.com>
  *
  * This library is free software; you can redistribute it and/or
@@ -21,7 +21,6 @@
  *
  */
 
-
 module.exports = function(grunt) {
 
 	// load needed modules
@@ -31,14 +30,30 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-wrap');
 	grunt.loadNpmTasks('grunt-karma');
 	grunt.loadNpmTasks('grunt-phpunit');
+	grunt.loadNpmTasks('grunt-bower-task');
 
+	var path = require('path');
 
 	grunt.initConfig({
 
 		meta: {
 			pkg: grunt.file.readJSON('package.json'),
 			version: '<%= meta.pkg.version %>',
-			production: 'public/'
+			production: 'js/public/'
+		},
+
+		bower: {
+			install: {
+				options: {
+					targetDir: './',
+					install: true,
+					verbose: true,
+					layout: function(type, component) {
+						var type_prefix = type + '/vendor';
+						return path.join(type_prefix, component);
+					}
+				}
+			}
 		},
 
 		concat: {
@@ -48,11 +63,11 @@ module.exports = function(grunt) {
 			},
 			dist: {
 				src: [
-					'config/app.js',
-					'app/controllers/**/*.js',
-					'app/directives/**/*.js',
-					'app/filters/**/*.js',
-					'app/services/**/*.js'
+					'js/config/app.js',
+					'js/app/controllers/**/*.js',
+					'js/app/directives/**/*.js',
+					'js/app/filters/**/*.js',
+					'js/app/services/**/*.js'
 				],
 				dest: '<%= meta.production %>app.js'
 			}
@@ -72,12 +87,13 @@ module.exports = function(grunt) {
 		jshint: {
 			files: [
 				'Gruntfile.js',
-				'app/controllers/**/*.js',
-				'app/directives/**/*.js',
-				'app/filters/**/*.js',
-				'app/services/**/*.js',
-				'app/tests/**/*.js',
-				'config/*.js'],
+				'bower.json',
+				'js/app/controllers/**/*.js',
+				'js/app/directives/**/*.js',
+				'js/app/filters/**/*.js',
+				'js/app/services/**/*.js',
+				'js/app/tests/**/*.js',
+				'js/config/*.js'],
 			options: {
 				// options here to override JSHint defaults
 				globals: {
@@ -91,23 +107,23 @@ module.exports = function(grunt) {
 			// and wrap tasks if something changed
 			concat: {
 				files: [
-					'app/controllers/**/*.js',
-					'app/directives/**/*.js',
-					'app/filters/**/*.js',
-					'app/services/**/*.js',
-					'config/*.js'
+					'js/app/controllers/**/*.js',
+					'js/app/directives/**/*.js',
+					'js/app/filters/**/*.js',
+					'js/app/services/**/*.js',
+					'js/config/*.js'
 				],
 				tasks: ['build']
 			},
 			phpunit: {
-				files: '../**/*.php',
+				files: './**/*.php',
 				tasks: ['phpunit']
 			}
 		},
 
 		phpunit: {
 			classes: {
-				dir: '../tests/unit'
+				dir: 'tests/unit'
 			},
 			options: {
 				colors: true
@@ -116,10 +132,10 @@ module.exports = function(grunt) {
 
 		karma: {
 			unit: {
-				configFile: 'config/karma.js'
+				configFile: 'js/config/karma.js'
 			},
 			continuous: {
-				configFile: 'config/karma.js',
+				configFile: 'js/config/karma.js',
 				singleRun: true,
 				browsers: ['PhantomJS'],
 				reporters: ['progress', 'junit'],
@@ -132,11 +148,12 @@ module.exports = function(grunt) {
 	});
 
 	// make tasks available under simpler commands
-	grunt.registerTask('build', ['jshint', 'concat', 'wrap']);
+	grunt.registerTask('build', ['jshint', 'concat', 'wrap', 'bower']);
 	grunt.registerTask('watchjs', ['watch:concat']);
 	grunt.registerTask('ci', ['karma:continuous']);
 	grunt.registerTask('testjs', ['karma:unit']);
 	grunt.registerTask('testphp', ['watch:phpunit']);
 	grunt.registerTask('default', ['build']);
+	grunt.registerTask('installdep', ['bower']);
 
 };

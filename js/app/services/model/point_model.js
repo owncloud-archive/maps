@@ -24,6 +24,20 @@
 angular.module('Map').factory('PointModel',
 [
 function () {
+	var points = {
+		'favorite': [
+			{
+				'title': 'London',
+				'coordinate': [51.505, -0.09],
+			},
+		],
+	};
+
+	var _getByCollection = function (collection) {
+		return points[collection];
+	};
+
 	return {
+		getByCollection: _getByCollection,
 	};
 }]);
