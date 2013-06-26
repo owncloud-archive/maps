@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<info>
+	<id>map</id>
+	<name>Map</name>
+	<description>Map App for ownCloud</description>
+	<licence>AGPLv3</licence>
+	<author>Qingping Hou</author>
+	<version>0.001</version>
+	<require>5.0.0</require>
+</info>
