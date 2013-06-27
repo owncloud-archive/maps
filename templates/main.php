@@ -14,7 +14,7 @@
 
 
 <script type="text/ng-template" id="main.html">
-	{% include 'partials/main.php' %}
+	{% include 'partials/main_view.php' %}
 </script>
 
 	<div id="app-navigation">
