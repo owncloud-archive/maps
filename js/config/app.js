@@ -22,7 +22,7 @@
  */
 
 
-angular.module('Map', ['OC']).
+angular.module('Map', ['OC', 'leaflet-directive']).
 	config(
 		['$routeProvider', '$interpolateProvider',
 		function ($routeProvider, $interpolateProvider) {

@@ -12,7 +12,8 @@
 	"exportsOverride": {
 		"leaflet": {
 			"js": "dist/**/*.js",
-			"css": "dist/**/*.css"
+			"css": "dist/**/*.css",
+			"img": "dist/images/*.png"
 		},
 		"angular-leaflet": {
 			"js": "dist/*.js"

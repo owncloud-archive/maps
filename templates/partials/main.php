@@ -8,3 +8,12 @@ I am a partial
 	</div>
 </div>
 
+<div ng-controller="MapController">
+	<style>
+		.angular-leaflet-map {
+			width: 640px;
+			height: 480px;
+		}
+	</style>
+	<leaflet center="center"></leaflet>
+</div>

@@ -21,14 +21,12 @@
  *
  */
 
+angular.module('Map').factory('Publisher',
+['_Publisher', 'PointModel',
+function (_Publisher, PointModel) {
+	publisher = new _Publisher();
 
-angular.module('Map').controller('PointController',
-	['$scope', 'PointBusinessLayer',
-function ($scope, PointBusinessLayer) {
+	publisher.subscribeObjectTo(PointModel, 'points');
 
-	var point_bl = PointBusinessLayer;
-
-	$scope.pointBusinessLayer = point_bl;
-	$scope.collections = point_bl.getCollections();
-
+	return publisher;
 }]);

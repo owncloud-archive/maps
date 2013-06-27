@@ -22,13 +22,14 @@
  */
 
 
-angular.module('Map').controller('PointController',
-	['$scope', 'PointBusinessLayer',
-function ($scope, PointBusinessLayer) {
+angular.module('Map').controller('MapController',
+	['$scope',
+function ($scope) {
 
-	var point_bl = PointBusinessLayer;
-
-	$scope.pointBusinessLayer = point_bl;
-	$scope.collections = point_bl.getCollections();
+	$scope.center = {
+		lat: 51.505,
+		lng: -0.09,
+		zoom: 8
+	};
 
 }]);

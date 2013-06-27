@@ -2,7 +2,7 @@
 
 'use strict';
 
-angular.module('Map', ['OC']).
+angular.module('Map', ['OC', 'leaflet-directive']).
 	config(
 		['$routeProvider', '$interpolateProvider',
 		function ($routeProvider, $interpolateProvider) {
@@ -30,6 +30,18 @@ function ($scope, $routeParams, PointBusinessLayer) {
 
 }]);
 
+angular.module('Map').controller('MapController',
+	['$scope',
+function ($scope) {
+
+	$scope.center = {
+		lat: 51.505,
+		lng: -0.09,
+		zoom: 8
+	};
+
+}]);
+
 angular.module('Map').controller('PointController',
 	['$scope', 'PointBusinessLayer',
 function ($scope, PointBusinessLayer) {
@@ -37,7 +49,7 @@ function ($scope, PointBusinessLayer) {
 	var point_bl = PointBusinessLayer;
 
 	$scope.pointBusinessLayer = point_bl;
-	$scope.collections = point_bl.getCollection();
+	$scope.collections = point_bl.getCollections();
 
 }]);
 

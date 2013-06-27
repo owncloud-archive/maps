@@ -49,8 +49,13 @@ module.exports = function(grunt) {
 					install: true,
 					verbose: true,
 					layout: function(type, component) {
-						var type_prefix = type + '/vendor';
-						return path.join(type_prefix, component);
+						if (type == 'img' && component == 'leaflet') {
+							// put leaflet images with css files
+							return 'css/vendor/leaflet/images';
+						} else {
+							var type_prefix = type + '/vendor';
+							return path.join(type_prefix, component);
+						}
 					}
 				}
 			}

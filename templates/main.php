@@ -2,6 +2,11 @@
 {{ script('vendor/angular/angular', 'appframework') }}
 {{ script('public/app', 'appframework') }}
 {{ script('public/app') }}
+
+{{ script('vendor/leaflet/leaflet') }}
+{{ script('vendor/angular-leaflet/angular-leaflet-directive.min') }}
+{{ style('vendor/leaflet/leaflet') }}
+
 {{ style('style') }}
 
 
