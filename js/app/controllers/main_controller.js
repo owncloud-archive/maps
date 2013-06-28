@@ -38,6 +38,6 @@ function ($scope, $routeParams, PointBusinessLayer) {
 		$scope.is_show_nav = false;
 	};
 
-	$scope.is_show_nav = false;
+	$scope.is_show_nav = true;
 
 }]);

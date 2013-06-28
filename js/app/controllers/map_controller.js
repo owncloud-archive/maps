@@ -25,11 +25,31 @@
 angular.module('Map').controller('MapController',
 	['$scope',
 function ($scope) {
-
 	$scope.center = {
 		lat: 51.505,
 		lng: -0.09,
 		zoom: 8
 	};
+
+	$scope.main_marker = {
+		lat: 51.505,
+		lng: -0.09,
+		focus: true,
+		draggable: true,
+	};
+
+	var setMainMarker = function () {
+		$scope.markers.__main_marker = $scope.main_marker;
+	};
+
+	$scope.markers = {};
+	setMainMarker();
+
+	$scope.$on('displayMultiMarkers', function (event, markers) {
+		$scope.markers = markers;
+		// hrm, we have to always reset main marker because of the way
+		// leaflet directive handles multi markers
+		setMainMarker();
+	});
 
 }]);

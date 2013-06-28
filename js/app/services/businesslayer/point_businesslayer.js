@@ -24,14 +24,41 @@
 angular.module('Map').factory('PointBusinessLayer',
 ['PointModel',
 function (PointModel) {
-	var collections = [
-		{
-			'title': 'favorite',
+	var collections = {
+		'favorite': {
+			'points': {
+				m1: {
+					lat: 51.505,
+					lng: -0.09,
+					message: "test favorite mark 1"
+				},
+				m2: {
+					lat: 51,
+					lng: 0,
+					message: "test favorite mark 2",
+				}
+			},
 		},
-		{
-			'title': 'friends\' home',
-		},
-	];
+		'good restaurants': {
+			'points': {
+				m1: {
+					lat: 51.805,
+					lng: -0.09,
+					message: "test restaurants mark 1"
+				},
+				m2: {
+					lat: 52,
+					lng: 0,
+					message: "test restaurants mark 2",
+				},
+				m3: {
+					lat: 51.7,
+					lng: 0.02,
+					message: "test restaurants mark 2",
+				}
+			},
+		}
+	};
 	var _getPointsByCollection = function (collection) {
 		return PointModel.getByCollection(collection);
 	};

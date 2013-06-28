@@ -38,27 +38,52 @@ function ($scope, $routeParams, PointBusinessLayer) {
 		$scope.is_show_nav = false;
 	};
 
-	$scope.is_show_nav = false;
+	$scope.is_show_nav = true;
 
 }]);
 
 angular.module('Map').controller('MapController',
 	['$scope',
 function ($scope) {
-
 	$scope.center = {
 		lat: 51.505,
 		lng: -0.09,
 		zoom: 8
 	};
 
+	$scope.main_marker = {
+		lat: 51.505,
+		lng: -0.09,
+		focus: true,
+		draggable: true,
+	};
+
+	var setMainMarker = function () {
+		$scope.markers.__main_marker = $scope.main_marker;
+	};
+
+	$scope.markers = {};
+	setMainMarker();
+
+	$scope.$on('displayMultiMarkers', function (event, markers) {
+		$scope.markers = markers;
+		// hrm, we have to always reset main marker because of the way
+		// leaflet directive handles multi markers
+		setMainMarker();
+	});
+
 }]);
 
 angular.module('Map').controller('PointController',
-	['$scope', 'PointBusinessLayer',
-function ($scope, PointBusinessLayer) {
-
+	['$scope', '$rootScope', 'PointBusinessLayer',
+function ($scope, $rootScope, PointBusinessLayer) {
 	var point_bl = PointBusinessLayer;
+
+	$scope.showPointCollectionOnMap = function (collection_name) {
+		$rootScope.$broadcast(
+			'displayMultiMarkers',
+			$scope.collections[collection_name].points);
+	};
 
 	$scope.pointBusinessLayer = point_bl;
 	$scope.collections = point_bl.getCollections();
@@ -68,14 +93,41 @@ function ($scope, PointBusinessLayer) {
 angular.module('Map').factory('PointBusinessLayer',
 ['PointModel',
 function (PointModel) {
-	var collections = [
-		{
-			'title': 'favorite',
+	var collections = {
+		'favorite': {
+			'points': {
+				m1: {
+					lat: 51.505,
+					lng: -0.09,
+					message: "test favorite mark 1"
+				},
+				m2: {
+					lat: 51,
+					lng: 0,
+					message: "test favorite mark 2",
+				}
+			},
 		},
-		{
-			'title': 'friends\' home',
-		},
-	];
+		'good restaurants': {
+			'points': {
+				m1: {
+					lat: 51.805,
+					lng: -0.09,
+					message: "test restaurants mark 1"
+				},
+				m2: {
+					lat: 52,
+					lng: 0,
+					message: "test restaurants mark 2",
+				},
+				m3: {
+					lat: 51.7,
+					lng: 0.02,
+					message: "test restaurants mark 2",
+				}
+			},
+		}
+	};
 	var _getPointsByCollection = function (collection) {
 		return PointModel.getByCollection(collection);
 	};
