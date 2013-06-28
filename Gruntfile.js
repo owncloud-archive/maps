@@ -153,12 +153,13 @@ module.exports = function(grunt) {
 	});
 
 	// make tasks available under simpler commands
-	grunt.registerTask('build', ['jshint', 'concat', 'wrap', 'bower']);
+	grunt.registerTask('build', ['jshint', 'concat', 'wrap']);
+	grunt.registerTask('bootstrap', ['bower', 'build']);
 	grunt.registerTask('watchjs', ['watch:concat']);
 	grunt.registerTask('ci', ['karma:continuous']);
 	grunt.registerTask('testjs', ['karma:unit']);
 	grunt.registerTask('testphp', ['watch:phpunit']);
-	grunt.registerTask('default', ['build']);
+	grunt.registerTask('default', ['bootstrap']);
 	grunt.registerTask('installdep', ['bower']);
 
 };

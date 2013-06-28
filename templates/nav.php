@@ -1,8 +1,14 @@
-<li class="open">
-	<a href="#/1" class="title">Level 1</a>
+<li>
+	<a ng-click="hideNavBar()">hide nav bar</a>
+</li>
+
+<li class="open" ng-controller="PointController">
+	<a ng-click="">Collections</a>
 	<ul>
-		<li>
-			<a href="#/2" class="title">Level 2</a>
+		<li ng-repeat="collection in pointBusinessLayer.getCollections()">
+			<a>[[ collection.title ]]</a>
 		</li>
 	</ul>
 </li>
+
+

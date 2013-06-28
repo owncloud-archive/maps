@@ -23,9 +23,21 @@
 
 
 angular.module('Map').controller('MainController',
-	['$scope', '$routeParams', 'PointBusinessLayer',
+	['$scope', '$routeParams',
 function ($scope, $routeParams, PointBusinessLayer) {
 
-	$scope.id = $routeParams.id;
+	$scope.toggleAppNav = function() {
+		$scope.is_show_nav = !$scope.is_show_nav;
+	};
+
+	$scope.showNavBar = function() {
+		$scope.is_show_nav = true;
+	};
+
+	$scope.hideNavBar = function() {
+		$scope.is_show_nav = false;
+	};
+
+	$scope.is_show_nav = false;
 
 }]);

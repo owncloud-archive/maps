@@ -11,24 +11,27 @@
 
 
 <div id="app" ng-app="Map" ng-cloak>
+	<script type="text/ng-template" id="main.html">
+		{% include 'partials/main_view.php' %}
+	</script>
 
+	<div ng-controller="MainController">
+		<div id="nav-toggle" class="map-hover"
+		 ng-click="showNavBar()" ng-show="!is_show_nav"></div>
 
-<script type="text/ng-template" id="main.html">
-	{% include 'partials/main_view.php' %}
-</script>
+		<div id="app-navigation" class="map-hover" ng-show="is_show_nav">
 
-	<div id="app-navigation">
+			<ul class="with-icon">
+				{% include 'nav.php' %}
+			</ul>
 
-		<ul class="with-icon">
-			{% include 'nav.php' %}
-		</ul>
+			<div id="app-settings">
+				{% include 'settings.php' %}
+			</div>
 
-		<div id="app-settings">
-			{% include 'settings.php' %}
 		</div>
 
+		<div id="app-content" ng-view></div>
+
 	</div>
-
-	<div id="app-content" ng-view></div>
-
 </div>
