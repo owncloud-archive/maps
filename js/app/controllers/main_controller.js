@@ -25,19 +25,28 @@
 angular.module('Map').controller('MainController',
 	['$scope', '$routeParams',
 function ($scope, $routeParams, PointBusinessLayer) {
-
-	$scope.toggleAppNav = function() {
-		$scope.is_show_nav = !$scope.is_show_nav;
-	};
-
 	$scope.showNavBar = function() {
+		$scope.is_show_panel = false;
 		$scope.is_show_nav = true;
 	};
 
 	$scope.hideNavBar = function() {
+		$scope.is_show_panel = true;
 		$scope.is_show_nav = false;
 	};
 
-	$scope.is_show_nav = true;
+	$scope.showSearchBar = function() {
+		$scope.is_show_searh = true;
+		$scope.is_show_panel = false;
+	};
+
+	$scope.hideSearchBar = function() {
+		$scope.is_show_searh = false;
+		$scope.is_show_panel = true;
+	};
+
+	$scope.is_show_panel = true;
+	$scope.is_show_nav = !$scope.is_show_panel;
+	$scope.is_show_searh = !$scope.is_show_panel;
 
 }]);

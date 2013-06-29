@@ -1,3 +1,7 @@
 <div ng-controller="MapController">
-	<leaflet center="center" markers="markers"></leaflet>
+	<leaflet
+		defaults="defaults"
+		center="center"
+		markers="markers">
+	</leaflet>
 </div>

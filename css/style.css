@@ -6,7 +6,6 @@
 }
 
 .map-hover {
-	background: #fff;
 	opacity: 0.8;
 	z-index: 10;
 }
@@ -16,12 +15,30 @@
 	right: 0px;
 }
 
+.control-icon {
+	width: 25px;
+	height: 25px;
+}
+
 #nav-toggle {
-	border-radius: 20px;
 	position: absolute;
 	width: 40px;
 	height: 40px;
-	top: 50%;
-	right: 0px;
+	top: 30px;
+	right: 10px;
 }
 
+.nav-toggle-icon {
+	opacity: 0.6;
+	margin-bottom: 10px;
+	background: #fff;
+	display: block;
+	border-radius: 20px;
+	width: 40px;
+	height: 40px;
+}
+
+.nav-toggle-icon img {
+	margin-top: 6px;
+	margin-left: 6px;
+}

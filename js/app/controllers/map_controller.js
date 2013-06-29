@@ -25,6 +25,15 @@
 angular.module('Map').controller('MapController',
 	['$scope',
 function ($scope) {
+	$scope.defaults = {
+		//tileLayer: "http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png",
+		//tileLayerOptions: {
+			//opacity: 0.9,
+			//detectRetina: true,
+			//reuseTiles: true,
+		//}
+	};
+
 	$scope.center = {
 		lat: 51.505,
 		lng: -0.09,
@@ -32,7 +41,7 @@ function ($scope) {
 	};
 
 	$scope.main_marker = {
-		lat: 51.505,
+		lat: 51.405,
 		lng: -0.09,
 		focus: true,
 		draggable: true,

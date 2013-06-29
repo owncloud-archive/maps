@@ -1,5 +1,16 @@
 <li>
-	<a ng-click="hideNavBar()">hide nav bar</a>
+	<div>
+		<a ng-click="hideNavBar()">hide nav bar</a>
+		<a ng-click="hideNavBar()">hide nav bar</a>
+		<a ng-click="hideNavBar()">hide nav bar</a>
+		<a ng-click="hideNavBar()">hide nav bar</a>
+		<a ng-click="hideNavBar()">hide nav bar</a>
+		<a ng-click="hideNavBar()">hide nav bar</a>
+		<a ng-click="hideNavBar()">hide nav bar</a>
+		<a ng-click="hideNavBar()">hide nav bar</a>
+		<a ng-click="hideNavBar()">hide nav bar</a>
+		<a ng-click="hideNavBar()">hide nav bar</a>
+	</div>
 </li>
 
 <li class="open" ng-controller="PointController">
