@@ -23,30 +23,56 @@
 
 
 angular.module('Map').controller('MainController',
-	['$scope', '$routeParams',
-function ($scope, $routeParams, PointBusinessLayer) {
-	$scope.showNavBar = function() {
+	['$scope', '$rootScope', '$routeParams', '$http',
+function ($scope, $rootScope, $routeParams, $http) {
+	$scope.showNavBar = function () {
 		$scope.is_show_panel = false;
 		$scope.is_show_nav = true;
 	};
 
-	$scope.hideNavBar = function() {
+	$scope.hideNavBar = function () {
 		$scope.is_show_panel = true;
 		$scope.is_show_nav = false;
 	};
 
-	$scope.showSearchBar = function() {
-		$scope.is_show_searh = true;
-		$scope.is_show_panel = false;
-	};
-
-	$scope.hideSearchBar = function() {
-		$scope.is_show_searh = false;
-		$scope.is_show_panel = true;
+	$scope.toggleSearchBar = function () {
+		$scope.is_show_search = !$scope.is_show_search;
 	};
 
 	$scope.is_show_panel = true;
 	$scope.is_show_nav = !$scope.is_show_panel;
-	$scope.is_show_searh = !$scope.is_show_panel;
+	$scope.is_show_search = !$scope.is_show_panel;
+	//$scope.is_show_search = true;
+
+	$scope.searchByAddress = function () {
+		var address = $scope.search_keyword;
+		if (address !== '') {
+			var req_url = '//open.mapquestapi.com/nominatim/v1/search?' +
+				'format=json' + '&q=' + address;
+			$http({method: 'GET', url: req_url}).
+				success(function (data, status) {
+					var first_re = data[0];
+					var boundingbox = first_re.boundingbox;
+					var south_west = {
+						lat: parseFloat(boundingbox[0]),
+						lng: parseFloat(boundingbox[2])
+					};
+					var north_east = {
+						lat: parseFloat(boundingbox[1]),
+						lng: parseFloat(boundingbox[3])
+					};
+					$rootScope.$broadcast('updateFocus', {
+						'coordinate': {
+							'lat': parseFloat(first_re.lat),
+							'lng': parseFloat(first_re.lon),
+						},
+						'bounds': {
+							southWest: south_west,
+							northEast: north_east,
+						},
+					});
+				});
+		}
+	};
 
 }]);

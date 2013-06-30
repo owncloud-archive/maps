@@ -23,31 +23,57 @@ angular.module('Map', ['OC', 'leaflet-directive']).
 }]);
 
 angular.module('Map').controller('MainController',
-	['$scope', '$routeParams',
-function ($scope, $routeParams, PointBusinessLayer) {
-	$scope.showNavBar = function() {
+	['$scope', '$rootScope', '$routeParams', '$http',
+function ($scope, $rootScope, $routeParams, $http) {
+	$scope.showNavBar = function () {
 		$scope.is_show_panel = false;
 		$scope.is_show_nav = true;
 	};
 
-	$scope.hideNavBar = function() {
+	$scope.hideNavBar = function () {
 		$scope.is_show_panel = true;
 		$scope.is_show_nav = false;
 	};
 
-	$scope.showSearchBar = function() {
-		$scope.is_show_searh = true;
-		$scope.is_show_panel = false;
-	};
-
-	$scope.hideSearchBar = function() {
-		$scope.is_show_searh = false;
-		$scope.is_show_panel = true;
+	$scope.toggleSearchBar = function () {
+		$scope.is_show_search = !$scope.is_show_search;
 	};
 
 	$scope.is_show_panel = true;
 	$scope.is_show_nav = !$scope.is_show_panel;
-	$scope.is_show_searh = !$scope.is_show_panel;
+	$scope.is_show_search = !$scope.is_show_panel;
+	//$scope.is_show_search = true;
+
+	$scope.searchByAddress = function () {
+		var address = $scope.search_keyword;
+		if (address !== '') {
+			var req_url = '//open.mapquestapi.com/nominatim/v1/search?' +
+				'format=json' + '&q=' + address;
+			$http({method: 'GET', url: req_url}).
+				success(function (data, status) {
+					var first_re = data[0];
+					var boundingbox = first_re.boundingbox;
+					var south_west = {
+						lat: parseFloat(boundingbox[0]),
+						lng: parseFloat(boundingbox[2])
+					};
+					var north_east = {
+						lat: parseFloat(boundingbox[1]),
+						lng: parseFloat(boundingbox[3])
+					};
+					$rootScope.$broadcast('updateFocus', {
+						'coordinate': {
+							'lat': parseFloat(first_re.lat),
+							'lng': parseFloat(first_re.lon),
+						},
+						'bounds': {
+							southWest: south_west,
+							northEast: north_east,
+						},
+					});
+				});
+		}
+	};
 
 }]);
 
@@ -56,11 +82,11 @@ angular.module('Map').controller('MapController',
 function ($scope) {
 	$scope.defaults = {
 		//tileLayer: "http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png",
-		//tileLayerOptions: {
-			//opacity: 0.9,
-			//detectRetina: true,
-			//reuseTiles: true,
-		//}
+		tileLayerOptions: {
+			opacity: 0.9,
+			detectRetina: true,
+			reuseTiles: true,
+		}
 	};
 
 	$scope.center = {
@@ -69,6 +95,8 @@ function ($scope) {
 		zoom: 8
 	};
 
+	$scope.bounds = [];
+
 	$scope.main_marker = {
 		lat: 51.405,
 		lng: -0.09,
@@ -76,18 +104,27 @@ function ($scope) {
 		draggable: true,
 	};
 
-	var setMainMarker = function () {
+	var _setMainMarker = function () {
 		$scope.markers.__main_marker = $scope.main_marker;
 	};
 
 	$scope.markers = {};
-	setMainMarker();
+	_setMainMarker();
+
+	$scope.$on('updateFocus', function (event, message) {
+		var coordinate = message.coordinate;
+		$scope.main_marker.lat = coordinate.lat;
+		$scope.main_marker.lng = coordinate.lng;
+		$scope.center.lat = coordinate.lat;
+		$scope.center.lng = coordinate.lng;
+		$scope.bounds = message.bounds;
+	});
 
 	$scope.$on('displayMultiMarkers', function (event, markers) {
 		$scope.markers = markers;
 		// hrm, we have to always reset main marker because of the way
 		// leaflet directive handles multi markers
-		setMainMarker();
+		_setMainMarker();
 	});
 
 }]);

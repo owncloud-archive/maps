@@ -6,6 +6,7 @@
 }
 
 .map-hover {
+	position: absolute;
 	opacity: 0.8;
 	z-index: 10;
 }
@@ -41,4 +42,12 @@
 .nav-toggle-icon img {
 	margin-top: 6px;
 	margin-left: 6px;
+}
+
+
+/* for search bar */
+#search-bar {
+	top: 30px;
+	right: 60px;
+	z-index: 8;
 }

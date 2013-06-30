@@ -2,6 +2,7 @@
 	<leaflet
 		defaults="defaults"
 		center="center"
+		bounds="bounds"
 		markers="markers">
 	</leaflet>
 </div>

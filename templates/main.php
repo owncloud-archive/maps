@@ -4,7 +4,7 @@
 {{ script('public/app') }}
 
 {{ script('vendor/leaflet/leaflet') }}
-{{ script('vendor/angular-leaflet/angular-leaflet-directive.min') }}
+{{ script('vendor/angular-leaflet/angular-leaflet-directive') }}
 {{ style('vendor/leaflet/leaflet') }}
 
 {{ style('style') }}
@@ -18,7 +18,7 @@
 	<div ng-controller="MainController">
 		<div id="nav-toggle" class="map-hover">
 			<div class="nav-toggle-icon"
-			 ng-click="showSearchBar()" ng-show="!is_show_nav">
+			 ng-click="toggleSearchBar()" ng-show="!is_show_nav">
 				<img class="control-icon"
 				 src="{{ image_path('search.svg') }}"
 				 alt="show search bar" />
@@ -41,7 +41,13 @@
 			</div>
 		</div>
 
-		<div id="search-bar"></div>
+		<div id="search-bar" class="map-hover" ng-show="is_show_search">
+			<form>
+				<input name="query" placeholder="Search a place"
+					ng-model="search_keyword" autocomplete="off" type="search">
+				<button ng-click="searchByAddress()"> Search </button>
+			</form>
+		</div>
 
 		<div id="app-content" ng-view></div>
 

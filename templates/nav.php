@@ -1,15 +1,6 @@
 <li>
 	<div>
 		<a ng-click="hideNavBar()">hide nav bar</a>
-		<a ng-click="hideNavBar()">hide nav bar</a>
-		<a ng-click="hideNavBar()">hide nav bar</a>
-		<a ng-click="hideNavBar()">hide nav bar</a>
-		<a ng-click="hideNavBar()">hide nav bar</a>
-		<a ng-click="hideNavBar()">hide nav bar</a>
-		<a ng-click="hideNavBar()">hide nav bar</a>
-		<a ng-click="hideNavBar()">hide nav bar</a>
-		<a ng-click="hideNavBar()">hide nav bar</a>
-		<a ng-click="hideNavBar()">hide nav bar</a>
 	</div>
 </li>
 

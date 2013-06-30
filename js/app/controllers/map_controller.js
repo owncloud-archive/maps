@@ -27,11 +27,11 @@ angular.module('Map').controller('MapController',
 function ($scope) {
 	$scope.defaults = {
 		//tileLayer: "http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png",
-		//tileLayerOptions: {
-			//opacity: 0.9,
-			//detectRetina: true,
-			//reuseTiles: true,
-		//}
+		tileLayerOptions: {
+			opacity: 0.9,
+			detectRetina: true,
+			reuseTiles: true,
+		}
 	};
 
 	$scope.center = {
@@ -40,6 +40,8 @@ function ($scope) {
 		zoom: 8
 	};
 
+	$scope.bounds = [];
+
 	$scope.main_marker = {
 		lat: 51.405,
 		lng: -0.09,
@@ -47,18 +49,27 @@ function ($scope) {
 		draggable: true,
 	};
 
-	var setMainMarker = function () {
+	var _setMainMarker = function () {
 		$scope.markers.__main_marker = $scope.main_marker;
 	};
 
 	$scope.markers = {};
-	setMainMarker();
+	_setMainMarker();
+
+	$scope.$on('updateFocus', function (event, message) {
+		var coordinate = message.coordinate;
+		$scope.main_marker.lat = coordinate.lat;
+		$scope.main_marker.lng = coordinate.lng;
+		$scope.center.lat = coordinate.lat;
+		$scope.center.lng = coordinate.lng;
+		$scope.bounds = message.bounds;
+	});
 
 	$scope.$on('displayMultiMarkers', function (event, markers) {
 		$scope.markers = markers;
 		// hrm, we have to always reset main marker because of the way
 		// leaflet directive handles multi markers
-		setMainMarker();
+		_setMainMarker();
 	});
 
 }]);
