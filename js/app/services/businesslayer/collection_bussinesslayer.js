@@ -36,12 +36,17 @@ function ($rootScope) {
 	var cbl = {};
 
 	cbl.setActive = function (collection_name) {
-		if (!(collection_name in collections)) {
-			return;
-		}
+		if (!collection_name) {
+			active_collection = null;
+			$rootScope.$broadcast('setCollectionActive', null);
+		} else {
+			if (!(collection_name in collections)) {
+				return;
+			}
 
-		$rootScope.$broadcast('setCollectionActive', collection_name);
-		active_collection = collection_name;
+			$rootScope.$broadcast('setCollectionActive', collection_name);
+			active_collection = collection_name;
+		}
 	};
 
 	cbl.getAll = function () {

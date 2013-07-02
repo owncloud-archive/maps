@@ -29,4 +29,7 @@ function ($scope, $rootScope, CollectionBussinessLayer) {
 
 	$scope.collectionBussinessLayer = collection_bl;
 
+	$scope.$on('cleanCollection', function() {
+		collection_bl.setActive(null);
+	});
 }]);

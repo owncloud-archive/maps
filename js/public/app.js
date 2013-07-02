@@ -29,6 +29,9 @@ function ($scope, $rootScope, CollectionBussinessLayer) {
 
 	$scope.collectionBussinessLayer = collection_bl;
 
+	$scope.$on('cleanCollection', function() {
+		collection_bl.setActive(null);
+	});
 }]);
 
 angular.module('Map').controller('MainController',
@@ -82,6 +85,8 @@ function ($scope, $rootScope, $routeParams, $http) {
 						},
 					});
 				});
+
+			$rootScope.$broadcast('cleanCollection');
 		}
 	};
 
@@ -148,7 +153,11 @@ function ($scope, $rootScope, PointBusinessLayer) {
 	$scope.active_points = {};
 
 	$scope.$on('setCollectionActive', function (event, collection_name) {
-		$scope.active_points = point_bl.getPointsByCollection(collection_name);
+		if (collection_name === null) {
+			$scope.active_points = {};
+		} else {
+			$scope.active_points = point_bl.getPointsByCollection(collection_name);
+		}
 		$rootScope.$broadcast('displayMultiMarkers', $scope.active_points);
 	});
 
@@ -171,12 +180,17 @@ function ($rootScope) {
 	var cbl = {};
 
 	cbl.setActive = function (collection_name) {
-		if (!(collection_name in collections)) {
-			return;
-		}
+		if (!collection_name) {
+			active_collection = null;
+			$rootScope.$broadcast('setCollectionActive', null);
+		} else {
+			if (!(collection_name in collections)) {
+				return;
+			}
 
-		$rootScope.$broadcast('setCollectionActive', collection_name);
-		active_collection = collection_name;
+			$rootScope.$broadcast('setCollectionActive', collection_name);
+			active_collection = collection_name;
+		}
 	};
 
 	cbl.getAll = function () {

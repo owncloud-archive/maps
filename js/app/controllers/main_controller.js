@@ -73,6 +73,8 @@ function ($scope, $rootScope, $routeParams, $http) {
 						},
 					});
 				});
+
+			$rootScope.$broadcast('cleanCollection');
 		}
 	};
 

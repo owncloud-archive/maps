@@ -30,7 +30,11 @@ function ($scope, $rootScope, PointBusinessLayer) {
 	$scope.active_points = {};
 
 	$scope.$on('setCollectionActive', function (event, collection_name) {
-		$scope.active_points = point_bl.getPointsByCollection(collection_name);
+		if (collection_name === null) {
+			$scope.active_points = {};
+		} else {
+			$scope.active_points = point_bl.getPointsByCollection(collection_name);
+		}
 		$rootScope.$broadcast('displayMultiMarkers', $scope.active_points);
 	});
 
