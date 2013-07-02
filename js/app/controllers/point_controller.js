@@ -23,17 +23,17 @@
 
 
 angular.module('Map').controller('PointController',
-	['$scope', '$rootScope', 'PointBusinessLayer',
+['$scope', '$rootScope', 'PointBusinessLayer',
 function ($scope, $rootScope, PointBusinessLayer) {
 	var point_bl = PointBusinessLayer;
 
-	$scope.showPointCollectionOnMap = function (collection_name) {
-		$rootScope.$broadcast(
-			'displayMultiMarkers',
-			$scope.collections[collection_name].points);
-	};
+	$scope.active_points = {};
+
+	$scope.$on('setCollectionActive', function (event, collection_name) {
+		$scope.active_points = point_bl.getPointsByCollection(collection_name);
+		$rootScope.$broadcast('displayMultiMarkers', $scope.active_points);
+	});
 
 	$scope.pointBusinessLayer = point_bl;
-	$scope.collections = point_bl.getCollections();
 
 }]);

@@ -27,11 +27,11 @@ angular.module('Map').controller('MapController',
 function ($scope) {
 	$scope.defaults = {
 		//tileLayer: "http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png",
-		tileLayerOptions: {
-			opacity: 0.9,
-			detectRetina: true,
-			reuseTiles: true,
-		}
+		//tileLayerOptions: {
+			//opacity: 0.9,
+			//detectRetina: true,
+			//reuseTiles: true,
+		//}
 	};
 
 	$scope.center = {
@@ -42,6 +42,8 @@ function ($scope) {
 
 	$scope.bounds = [];
 
+	$scope.markers = {};
+
 	$scope.main_marker = {
 		lat: 51.405,
 		lng: -0.09,
@@ -50,10 +52,9 @@ function ($scope) {
 	};
 
 	var _setMainMarker = function () {
-		$scope.markers.__main_marker = $scope.main_marker;
+		//$scope.markers.__main_marker = $scope.main_marker;
 	};
 
-	$scope.markers = {};
 	_setMainMarker();
 
 	$scope.$on('updateFocus', function (event, message) {

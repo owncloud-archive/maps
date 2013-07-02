@@ -43,6 +43,7 @@ function ($scope, $rootScope, $routeParams, $http) {
 	$scope.is_show_nav = !$scope.is_show_panel;
 	$scope.is_show_search = !$scope.is_show_panel;
 	//$scope.is_show_search = true;
+	$scope.is_show_nav = true;
 
 	$scope.searchByAddress = function () {
 		var address = $scope.search_keyword;

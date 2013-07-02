@@ -21,14 +21,12 @@
  *
  */
 
-angular.module('Map').factory('PointBusinessLayer',
-['PointModel',
-function (PointModel) {
-	var pbl = {};
 
-	pbl.getPointsByCollection = function (collection) {
-		return PointModel.getByCollection(collection);
-	};
+angular.module('Map').controller('CollectionController',
+	['$scope', '$rootScope', 'CollectionBussinessLayer',
+function ($scope, $rootScope, CollectionBussinessLayer) {
+	var collection_bl = CollectionBussinessLayer;
 
-	return pbl;
+	$scope.collectionBussinessLayer = collection_bl;
+
 }]);

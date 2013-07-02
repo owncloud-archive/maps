@@ -22,6 +22,15 @@ angular.module('Map', ['OC', 'leaflet-directive']).
 	$interpolateProvider.endSymbol(']]');
 }]);
 
+angular.module('Map').controller('CollectionController',
+	['$scope', '$rootScope', 'CollectionBussinessLayer',
+function ($scope, $rootScope, CollectionBussinessLayer) {
+	var collection_bl = CollectionBussinessLayer;
+
+	$scope.collectionBussinessLayer = collection_bl;
+
+}]);
+
 angular.module('Map').controller('MainController',
 	['$scope', '$rootScope', '$routeParams', '$http',
 function ($scope, $rootScope, $routeParams, $http) {
@@ -43,6 +52,7 @@ function ($scope, $rootScope, $routeParams, $http) {
 	$scope.is_show_nav = !$scope.is_show_panel;
 	$scope.is_show_search = !$scope.is_show_panel;
 	//$scope.is_show_search = true;
+	$scope.is_show_nav = true;
 
 	$scope.searchByAddress = function () {
 		var address = $scope.search_keyword;
@@ -82,11 +92,11 @@ angular.module('Map').controller('MapController',
 function ($scope) {
 	$scope.defaults = {
 		//tileLayer: "http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png",
-		tileLayerOptions: {
-			opacity: 0.9,
-			detectRetina: true,
-			reuseTiles: true,
-		}
+		//tileLayerOptions: {
+			//opacity: 0.9,
+			//detectRetina: true,
+			//reuseTiles: true,
+		//}
 	};
 
 	$scope.center = {
@@ -97,6 +107,8 @@ function ($scope) {
 
 	$scope.bounds = [];
 
+	$scope.markers = {};
+
 	$scope.main_marker = {
 		lat: 51.405,
 		lng: -0.09,
@@ -105,10 +117,9 @@ function ($scope) {
 	};
 
 	var _setMainMarker = function () {
-		$scope.markers.__main_marker = $scope.main_marker;
+		//$scope.markers.__main_marker = $scope.main_marker;
 	};
 
-	$scope.markers = {};
 	_setMainMarker();
 
 	$scope.$on('updateFocus', function (event, message) {
@@ -130,25 +141,71 @@ function ($scope) {
 }]);
 
 angular.module('Map').controller('PointController',
-	['$scope', '$rootScope', 'PointBusinessLayer',
+['$scope', '$rootScope', 'PointBusinessLayer',
 function ($scope, $rootScope, PointBusinessLayer) {
 	var point_bl = PointBusinessLayer;
 
-	$scope.showPointCollectionOnMap = function (collection_name) {
-		$rootScope.$broadcast(
-			'displayMultiMarkers',
-			$scope.collections[collection_name].points);
-	};
+	$scope.active_points = {};
+
+	$scope.$on('setCollectionActive', function (event, collection_name) {
+		$scope.active_points = point_bl.getPointsByCollection(collection_name);
+		$rootScope.$broadcast('displayMultiMarkers', $scope.active_points);
+	});
 
 	$scope.pointBusinessLayer = point_bl;
-	$scope.collections = point_bl.getCollections();
 
+}]);
+
+angular.module('Map').factory('CollectionBussinessLayer',
+['$rootScope',
+function ($rootScope) {
+	var active_collection = null;
+	var collections = {
+		'favorite': {
+			'description': 'my favorite places'
+		},
+		'good restaurants': {
+		}
+	};
+
+	var cbl = {};
+
+	cbl.setActive = function (collection_name) {
+		if (!(collection_name in collections)) {
+			return;
+		}
+
+		$rootScope.$broadcast('setCollectionActive', collection_name);
+		active_collection = collection_name;
+	};
+
+	cbl.getAll = function () {
+		return collections;
+	};
+
+	cbl.isActive = function (collection_name) {
+		return (active_collection == collection_name);
+	};
+
+	return cbl;
 }]);
 
 angular.module('Map').factory('PointBusinessLayer',
 ['PointModel',
 function (PointModel) {
-	var collections = {
+	var pbl = {};
+
+	pbl.getPointsByCollection = function (collection) {
+		return PointModel.getByCollection(collection);
+	};
+
+	return pbl;
+}]);
+
+angular.module('Map').factory('PointModel',
+[
+function () {
+	var points = {
 		'favorite': {
 			'points': {
 				m1: {
@@ -183,39 +240,14 @@ function (PointModel) {
 			},
 		}
 	};
-	var _getPointsByCollection = function (collection) {
-		return PointModel.getByCollection(collection);
+
+	var pmodel = {};
+
+	pmodel.getByCollection = function (collection) {
+		return points[collection].points;
 	};
 
-	var _getCollections = function () {
-		return collections;
-	};
-
-	return {
-		getPointsByCollection: _getPointsByCollection,
-		getCollections: _getCollections,
-	};
-}]);
-
-angular.module('Map').factory('PointModel',
-[
-function () {
-	var points = {
-		'favorite': [
-			{
-				'title': 'London',
-				'coordinate': [51.505, -0.09],
-			},
-		],
-	};
-
-	var _getByCollection = function (collection) {
-		return points[collection];
-	};
-
-	return {
-		getByCollection: _getByCollection,
-	};
+	return pmodel;
 }]);
 
 angular.module('Map').factory('Publisher',

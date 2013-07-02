@@ -27,7 +27,7 @@
 			<div class="nav-toggle-icon"
 			 ng-click="showNavBar()" ng-show="!is_show_nav">
 				<img class="control-icon"
-				 src="{{ image_path('bookmarks.svg') }}"
+				 src="{{ image_path('bookmark.svg') }}"
 				 alt="show bookmarks" />
 			</div>
 		</div>
@@ -41,7 +41,8 @@
 			</div>
 		</div>
 
-		<div id="search-bar" class="map-hover" ng-show="is_show_search">
+		<div id="search-bar" class="map-hover"
+		 ng-show="is_show_search && !is_show_nav">
 			<form>
 				<input name="query" placeholder="Search a place"
 					ng-model="search_keyword" autocomplete="off" type="search">

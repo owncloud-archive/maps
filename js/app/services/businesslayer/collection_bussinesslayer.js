@@ -21,14 +21,36 @@
  *
  */
 
-angular.module('Map').factory('PointBusinessLayer',
-['PointModel',
-function (PointModel) {
-	var pbl = {};
-
-	pbl.getPointsByCollection = function (collection) {
-		return PointModel.getByCollection(collection);
+angular.module('Map').factory('CollectionBussinessLayer',
+['$rootScope',
+function ($rootScope) {
+	var active_collection = null;
+	var collections = {
+		'favorite': {
+			'description': 'my favorite places'
+		},
+		'good restaurants': {
+		}
 	};
 
-	return pbl;
+	var cbl = {};
+
+	cbl.setActive = function (collection_name) {
+		if (!(collection_name in collections)) {
+			return;
+		}
+
+		$rootScope.$broadcast('setCollectionActive', collection_name);
+		active_collection = collection_name;
+	};
+
+	cbl.getAll = function () {
+		return collections;
+	};
+
+	cbl.isActive = function (collection_name) {
+		return (active_collection == collection_name);
+	};
+
+	return cbl;
 }]);
