@@ -4,7 +4,7 @@
 {{ script('public/app') }}
 
 {{ script('vendor/leaflet/leaflet') }}
-{{ script('vendor/angular-leaflet/angular-leaflet-directive') }}
+{{ script('vendor/angular-leaflet/angular-leaflet-directive.min') }}
 {{ style('vendor/leaflet/leaflet') }}
 
 {{ style('style') }}
