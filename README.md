@@ -2,15 +2,20 @@
 
 You will need node.js version >= 0.8
 
+To automatically pull all dependencies and build javascript files:
+
+	make bootstrap
+
+
 ## Build JavaScript file
 
-To build the JavaScript file run::
+To build the JavaScript file run:
 
-    make
+	make build
 
 If you want to autocompile on change run:
 
-    make watch
+	make watch
 
 ## Running unittests
 Unittests are run with karma:

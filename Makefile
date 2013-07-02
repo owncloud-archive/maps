@@ -5,7 +5,7 @@ grunt=$(CURDIR)/node_modules/grunt-cli/bin/grunt
 phantomjs=$(CURDIR)/node_modules/phantomjs/bin/phantomjs
 
 
-all: build
+all: bootstrap
 
 clean:
 	rm -rf $(build_directory)
@@ -19,13 +19,14 @@ dist: clean
 # tests
 test: javascript-tests unit-tests integration-tests acceptance-tests
 
+phpunit: deps
+	$(grunt) --config $(CURDIR)/Gruntfile.js testphp
+
 unit-tests:
 	phpunit tests/unit
 
-
 integration-tests:
 	phpunit tests/integration
-
 
 acceptance-tests:
 	cd tests/acceptance; make headless
@@ -42,12 +43,14 @@ karma: deps
 	export CHROME_BIN=$(chrome_bin) && export FIREFOX_BIN=$(firefox_bin) && \
 	$(grunt) --config $(CURDIR)/Gruntfile.js testjs
 
-build: deps
+bootstrap: deps
 	mkdir -p $(CURDIR)/js/public
+	$(grunt) --config $(CURDIR)/Gruntfile.js bootstrap
+
+build: deps
 	$(grunt) --config $(CURDIR)/Gruntfile.js build
 
 deps:
-	cd $(CURDIR)/
 	npm install --deps
 
 

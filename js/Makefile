@@ -1,7 +1,7 @@
 firefox_bin=/usr/bin/firefox
 chrome_bin=/usr/bin/chromium
-grunt=$(CURDIR)/node_modules/grunt-cli/bin/grunt
-phantomjs=$(CURDIR)/node_modules/phantomjs/bin/phantomjs
+grunt=$(CURDIR)/../node_modules/grunt-cli/bin/grunt
+phantomjs=$(CURDIR)/../node_modules/phantomjs/bin/phantomjs
 
 all: build
 
@@ -25,7 +25,7 @@ test: deps
 	$(grunt) --config $(CURDIR)/Gruntfile.js ci
 
 phpunit: deps
-	$(grunt) --config $(CURDIR)/Gruntfile.coffee testphp
+	$(grunt) --config $(CURDIR)/Gruntfile.js testphp
 
 clean:
 	rm -rf $(CURDIR)/node_modules/

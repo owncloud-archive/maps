@@ -7,7 +7,7 @@
 	],
 	"dependencies": {
 		"leaflet": "*",
-		"angular-leaflet": "*"
+		"angular-leaflet": "0.3.1"
 	},
 	"exportsOverride": {
 		"leaflet": {
