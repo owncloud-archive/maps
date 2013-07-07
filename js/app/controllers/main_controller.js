@@ -62,6 +62,7 @@ function ($scope, $rootScope, $routeParams, $http) {
 						lat: parseFloat(boundingbox[1]),
 						lng: parseFloat(boundingbox[3])
 					};
+					// broadcast event for map controller
 					$rootScope.$broadcast('updateFocus', {
 						'coordinate': {
 							'lat': parseFloat(first_re.lat),

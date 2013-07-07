@@ -6,10 +6,15 @@
 		"node_modules"
 	],
 	"dependencies": {
+		"font-awesome": "*",
 		"leaflet": "*",
-		"angular-leaflet": "0.3.1"
+		"angular-leaflet": "0.3.3"
 	},
 	"exportsOverride": {
+		"font-awesome": {
+			"css": "css/*.css",
+			"font": "font/*"
+		},
 		"leaflet": {
 			"js": "dist/**/*.js",
 			"css": "dist/**/*.css",

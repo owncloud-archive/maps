@@ -74,6 +74,7 @@ function ($scope, $rootScope, $routeParams, $http) {
 						lat: parseFloat(boundingbox[1]),
 						lng: parseFloat(boundingbox[3])
 					};
+					// broadcast event for map controller
 					$rootScope.$broadcast('updateFocus', {
 						'coordinate': {
 							'lat': parseFloat(first_re.lat),
@@ -121,12 +122,6 @@ function ($scope) {
 		draggable: true,
 	};
 
-	var _setMainMarker = function () {
-		//$scope.markers.__main_marker = $scope.main_marker;
-	};
-
-	_setMainMarker();
-
 	$scope.$on('updateFocus', function (event, message) {
 		var coordinate = message.coordinate;
 		$scope.main_marker.lat = coordinate.lat;
@@ -138,9 +133,6 @@ function ($scope) {
 
 	$scope.$on('displayMultiMarkers', function (event, markers) {
 		$scope.markers = markers;
-		// hrm, we have to always reset main marker because of the way
-		// leaflet directive handles multi markers
-		_setMainMarker();
 	});
 
 }]);

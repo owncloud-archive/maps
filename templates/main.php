@@ -1,3 +1,4 @@
+{{ style('vendor/font-awesome/font-awesome.min') }}
 
 {{ script('vendor/angular/angular', 'appframework') }}
 {{ script('public/app', 'appframework') }}
@@ -19,16 +20,12 @@
 		<div id="nav-toggle" class="map-hover">
 			<div class="nav-toggle-icon"
 			 ng-click="toggleSearchBar()" ng-show="!is_show_nav">
-				<img class="control-icon"
-				 src="{{ image_path('search.svg') }}"
-				 alt="show search bar" />
+				<i class="icon-search icon-2x"></i>
 			</div>
 
 			<div class="nav-toggle-icon"
 			 ng-click="showNavBar()" ng-show="!is_show_nav">
-				<img class="control-icon"
-				 src="{{ image_path('bookmark.svg') }}"
-				 alt="show bookmarks" />
+				<i class="icon-bookmark icon-2x"></i>
 			</div>
 		</div>
 

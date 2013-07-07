@@ -2,9 +2,9 @@
 
 /**
  * ownCloud - Map app
- * 
+ *
  * @author Qingping Hou
- * 
+ *
  * @copyright 2013 Qingping Hou <qingping.hou@gmail.com>
  *
  * This library is free software; you can redistribute it and/or

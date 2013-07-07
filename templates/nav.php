@@ -1,7 +1,14 @@
 <li>
-	<div id="panel-hide-button">
+	<div id="nav-control-group">
 		<a ng-click="hideNavBar()">
-			&gt;&gt; Hide Panel
+			<i class="icon-circle-arrow-right icon-large"></i>
+			<span class="icon-text">hide panel</span>
+		</a>
+	</div>
+	<div>
+		<a>
+			<i class="icon-plus icon-large"></i>
+			<span class="icon-text">add current marker to collection</span>
 		</a>
 	</div>
 </li>
