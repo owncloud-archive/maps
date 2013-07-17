@@ -30,7 +30,7 @@
 }
 
 .nav-toggle-icon {
-	opacity: 0.6;
+	opacity: 0.8;
 	margin-bottom: 10px;
 	background: #fff;
 	display: block;
@@ -63,4 +63,24 @@
 	top: 30px;
 	right: 60px;
 	z-index: 8;
+}
+
+
+/* for panels */
+.panel-close-button {
+	position: relative;
+	float: right;
+	margin-top: -10px;
+	margin-right: -5px;
+}
+
+#main-marker-panel {
+	padding: 20px;
+	border-radius: 10px;
+	top: 10%;
+	left: 50%;
+	width: 500px;
+	margin-left: -250px;
+	background: #FFF;
+	z-index: 1000;
 }

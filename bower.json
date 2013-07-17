@@ -8,7 +8,7 @@
 	"dependencies": {
 		"font-awesome": "*",
 		"leaflet": "*",
-		"angular-leaflet": "0.3.3"
+		"angular-leaflet": "0.4.0"
 	},
 	"exportsOverride": {
 		"font-awesome": {

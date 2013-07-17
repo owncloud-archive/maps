@@ -37,25 +37,22 @@ function ($scope, $rootScope, CollectionBussinessLayer) {
 angular.module('Map').controller('MainController',
 	['$scope', '$rootScope', '$routeParams', '$http',
 function ($scope, $rootScope, $routeParams, $http) {
+	$scope.is_show_nav = false;
+	$scope.is_show_search = false;
+	//$scope.is_show_search = true;
+	//$scope.is_show_nav = true;
+
 	$scope.showNavBar = function () {
-		$scope.is_show_panel = false;
 		$scope.is_show_nav = true;
 	};
 
 	$scope.hideNavBar = function () {
-		$scope.is_show_panel = true;
 		$scope.is_show_nav = false;
 	};
 
 	$scope.toggleSearchBar = function () {
 		$scope.is_show_search = !$scope.is_show_search;
 	};
-
-	$scope.is_show_panel = true;
-	$scope.is_show_nav = !$scope.is_show_panel;
-	$scope.is_show_search = !$scope.is_show_panel;
-	//$scope.is_show_search = true;
-	//$scope.is_show_nav = true;
 
 	$scope.searchByAddress = function () {
 		var address = $scope.search_keyword;
@@ -90,7 +87,6 @@ function ($scope, $rootScope, $routeParams, $http) {
 			$rootScope.$broadcast('cleanCollection');
 		}
 	};
-
 }]);
 
 angular.module('Map').controller('MapController',
@@ -135,6 +131,25 @@ function ($scope) {
 		$scope.markers = markers;
 	});
 
+}]);
+
+angular.module('Map').controller('MarkerPanelController',
+	['$scope', '$rootScope', '$routeParams', '$http',
+function ($scope, $rootScope, $routeParams, $http) {
+	//$scope.is_show_main_marker_panel = false;
+	$scope.is_show_main_marker_panel = true;
+
+	$scope.$on('leafletDirectiveMainMarkerClick', function() {
+		$scope.is_show_main_marker_panel = !$scope.is_show_main_marker_panel;
+	});
+
+	$scope.closeMainMarkerPanel = function() {
+		$scope.is_show_main_marker_panel = false;
+	};
+
+	$scope.showAddMainMarkerForm = function() {
+		$scope.is_show_add_main_marker_form = true;
+	};
 }]);
 
 angular.module('Map').controller('PointController',

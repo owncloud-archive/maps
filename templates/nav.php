@@ -5,12 +5,6 @@
 			<span class="icon-text">hide panel</span>
 		</a>
 	</div>
-	<div>
-		<a>
-			<i class="icon-plus icon-large"></i>
-			<span class="icon-text">add current marker to collection</span>
-		</a>
-	</div>
 </li>
 
 <li class="open" ng-controller="CollectionController">
