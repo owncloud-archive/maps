@@ -1,4 +1,3 @@
-
 /**
  * ownCloud - Map app
  *

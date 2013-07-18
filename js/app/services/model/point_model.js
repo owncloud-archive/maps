@@ -66,5 +66,9 @@ function () {
 		return points[collection].points;
 	};
 
+	pmodel.addPointToCollection = function (point_name, point_data, collection_name) {
+		points[collection_name].points[point_name] = point_data;
+	};
+
 	return pmodel;
 }]);

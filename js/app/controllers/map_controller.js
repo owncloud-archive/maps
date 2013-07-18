@@ -23,8 +23,8 @@
 
 
 angular.module('Map').controller('MapController',
-	['$scope',
-function ($scope) {
+['$scope', '$rootScope',
+function ($scope, $rootScope) {
 	$scope.defaults = {
 		//tileLayer: "http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png",
 		//tileLayerOptions: {
@@ -62,6 +62,10 @@ function ($scope) {
 
 	$scope.$on('displayMultiMarkers', function (event, markers) {
 		$scope.markers = markers;
+	});
+
+	$scope.$on('leafletDirectiveMainMarkerClick', function() {
+		$rootScope.$broadcast('ocMapMainMarkerClick', $scope.main_marker);
 	});
 
 }]);

@@ -30,5 +30,9 @@ function (PointModel) {
 		return PointModel.getByCollection(collection);
 	};
 
+	pbl.addPointToCollection = function (point_name, point_data, collection_name) {
+		return PointModel.addPointToCollection(point_name, point_data, collection_name);
+	};
+
 	return pbl;
 }]);

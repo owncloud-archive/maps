@@ -90,8 +90,8 @@ function ($scope, $rootScope, $routeParams, $http) {
 }]);
 
 angular.module('Map').controller('MapController',
-	['$scope',
-function ($scope) {
+['$scope', '$rootScope',
+function ($scope, $rootScope) {
 	$scope.defaults = {
 		//tileLayer: "http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png",
 		//tileLayerOptions: {
@@ -131,16 +131,30 @@ function ($scope) {
 		$scope.markers = markers;
 	});
 
+	$scope.$on('leafletDirectiveMainMarkerClick', function() {
+		$rootScope.$broadcast('ocMapMainMarkerClick', $scope.main_marker);
+	});
+
 }]);
 
 angular.module('Map').controller('MarkerPanelController',
-	['$scope', '$rootScope', '$routeParams', '$http',
-function ($scope, $rootScope, $routeParams, $http) {
+['$scope', '$rootScope', '$routeParams', '$http', 'CollectionBussinessLayer',
+'PointBusinessLayer',
+function ($scope, $rootScope, $routeParams, $http, CollectionBussinessLayer,
+PointBusinessLayer) {
+	var collection_bl = CollectionBussinessLayer;
+	var point_bl = PointBusinessLayer;
 	//$scope.is_show_main_marker_panel = false;
 	$scope.is_show_main_marker_panel = true;
+	$scope.is_show_add_main_marker_form = true;
+	$scope.collectionBussinessLayer = collection_bl;
 
-	$scope.$on('leafletDirectiveMainMarkerClick', function() {
+	$scope.$on('ocMapMainMarkerClick', function(event, main_marker) {
 		$scope.is_show_main_marker_panel = !$scope.is_show_main_marker_panel;
+		$scope.new_point_info = {
+			lat: main_marker.lat,
+			lng: main_marker.lng,
+		};
 	});
 
 	$scope.closeMainMarkerPanel = function() {
@@ -149,6 +163,19 @@ function ($scope, $rootScope, $routeParams, $http) {
 
 	$scope.showAddMainMarkerForm = function() {
 		$scope.is_show_add_main_marker_form = true;
+	};
+
+	$scope.submitAddMainMarkerForm = function() {
+		$scope.is_show_add_main_marker_form = false;
+		if (!angular.isDefined($scope.new_point_info.lat) ||
+			!angular.isDefined($scope.new_point_info.lng)) {
+			console.log('error: no main marker info!!!');
+			return;
+		}
+		// @TODO check user input here!  18.07 2013 (houqp)
+		point_bl.addPointToCollection(
+				$scope.new_point_name, $scope.new_point_info, $scope.selected_collection);
+		$scope.is_show_main_marker_panel = false;
 	};
 }]);
 
@@ -220,6 +247,10 @@ function (PointModel) {
 		return PointModel.getByCollection(collection);
 	};
 
+	pbl.addPointToCollection = function (point_name, point_data, collection_name) {
+		return PointModel.addPointToCollection(point_name, point_data, collection_name);
+	};
+
 	return pbl;
 }]);
 
@@ -266,6 +297,10 @@ function () {
 
 	pmodel.getByCollection = function (collection) {
 		return points[collection].points;
+	};
+
+	pmodel.addPointToCollection = function (point_name, point_data, collection_name) {
+		points[collection_name].points[point_name] = point_data;
 	};
 
 	return pmodel;
