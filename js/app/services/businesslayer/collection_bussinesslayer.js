@@ -57,5 +57,9 @@ function ($rootScope) {
 		return (active_collection == collection_name);
 	};
 
+	cbl.add = function (new_collection_name) {
+		collections[new_collection_name] = {};
+	};
+
 	return cbl;
 }]);

@@ -67,6 +67,11 @@ function () {
 	};
 
 	pmodel.addPointToCollection = function (point_name, point_data, collection_name) {
+		// @TODO remove following when real backend db is there  21.07 2013 (houqp)
+		if (!points[collection_name]) {
+			points[collection_name] = {'points': {}};
+		}
+
 		points[collection_name].points[point_name] = point_data;
 	};
 

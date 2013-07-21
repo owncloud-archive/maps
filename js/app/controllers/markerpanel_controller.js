@@ -28,10 +28,16 @@ function ($scope, $rootScope, $routeParams, $http, CollectionBussinessLayer,
 PointBusinessLayer) {
 	var collection_bl = CollectionBussinessLayer;
 	var point_bl = PointBusinessLayer;
-	//$scope.is_show_main_marker_panel = false;
+
+	var popupInit = function() {
+		$scope.is_show_main_marker_panel = false;
+		$scope.is_show_add_main_marker_form = false;
+		$scope.collectionBussinessLayer = collection_bl;
+		$scope.is_show_selection_collection = true;
+	};
+
+	popupInit();
 	$scope.is_show_main_marker_panel = true;
-	$scope.is_show_add_main_marker_form = true;
-	$scope.collectionBussinessLayer = collection_bl;
 
 	$scope.$on('ocMapMainMarkerClick', function(event, main_marker) {
 		$scope.is_show_main_marker_panel = !$scope.is_show_main_marker_panel;
@@ -42,7 +48,7 @@ PointBusinessLayer) {
 	});
 
 	$scope.closeMainMarkerPanel = function() {
-		$scope.is_show_main_marker_panel = false;
+		popupInit();
 	};
 
 	$scope.showAddMainMarkerForm = function() {
@@ -59,6 +65,20 @@ PointBusinessLayer) {
 		// @TODO check user input here!  18.07 2013 (houqp)
 		point_bl.addPointToCollection(
 				$scope.new_point_name, $scope.new_point_info, $scope.selected_collection);
-		$scope.is_show_main_marker_panel = false;
+		popupInit();
+	};
+
+	$scope.addNewCollection = function() {
+		collection_bl.add($scope.new_collection_name);
+		$scope.is_show_selection_collection = true;
+		$scope.selected_collection = $scope.new_collection_name;
+	};
+
+	$scope.showAddCollectionForm = function() {
+		$scope.is_show_selection_collection = false;
+	};
+
+	$scope.hideAddCollectionForm = function() {
+		$scope.is_show_selection_collection = true;
 	};
 }]);

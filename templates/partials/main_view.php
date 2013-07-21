@@ -12,22 +12,36 @@
 				<input ng-model="new_point_name" type="text" placeholder="home"/>
 				<p>Location description:</p>
 				<input ng-model="new_point_info.message" type="text" placeholder="my current home"/>
+				<!-- collection selection -->
 				<p>Save to collection:</p>
-				<select ng-model="selected_collection"
-				 ng-options="key as key for (key, value) in  collectionBussinessLayer.getAll()">
-					<option value="">-- chose collection --</option>
-				</select>
+				<div ng-show="is_show_selection_collection">
+					<select ng-model="selected_collection"
+					 ng-options="key as key for (key, value) in  collectionBussinessLayer.getAll()">
+						<option value="">-- chose collection --</option>
+					</select>
+					<button ng-click="showAddCollectionForm()">
+						<i class="icon-plus"></i>
+					</button>
+				</div>
+				<div ng-show="!is_show_selection_collection">
+					<input type="text" ng-model="new_collection_name"/>
+					<button ng-click="addNewCollection()">
+						<i class="icon-ok"></i>
+					</button>
+					<button ng-click="hideAddCollectionForm()">
+						<i class="icon-remove"></i>
+					</button>
+				</div>
+
+				<button ng-click="submitAddMainMarkerForm()">
+					<p>Add</p>
+				</button>
 			</div>
 
-			<button ng-show="is_show_add_main_marker_form" ng-click="submitAddMainMarkerForm()">
-				<i class="icon-plus icon-large"></i>
-				<span class="icon-text">Add</span>
-			</button>
 			<a ng-show="!is_show_add_main_marker_form" ng-click="showAddMainMarkerForm()">
 				<i class="icon-plus icon-large"></i>
 				<span class="icon-text">add current marker to collection</span>
 			</a>
-
 		</div>
 	</div>
 </div>
