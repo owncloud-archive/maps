@@ -36,6 +36,9 @@
 				<button ng-click="submitAddMainMarkerForm()">
 					<p>Add</p>
 				</button>
+				<button ng-click="hideAddMainMarkerForm()">
+					<p>Cancel</p>
+				</button>
 			</div>
 
 			<a ng-show="!is_show_add_main_marker_form" ng-click="showAddMainMarkerForm()">

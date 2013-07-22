@@ -37,7 +37,7 @@ PointBusinessLayer) {
 	};
 
 	popupInit();
-	$scope.is_show_main_marker_panel = true;
+	//$scope.is_show_main_marker_panel = true;
 
 	$scope.$on('ocMapMainMarkerClick', function(event, main_marker) {
 		$scope.is_show_main_marker_panel = !$scope.is_show_main_marker_panel;
@@ -53,6 +53,10 @@ PointBusinessLayer) {
 
 	$scope.showAddMainMarkerForm = function() {
 		$scope.is_show_add_main_marker_form = true;
+	};
+
+	$scope.hideAddMainMarkerForm = function() {
+		$scope.is_show_add_main_marker_form = false;
 	};
 
 	$scope.submitAddMainMarkerForm = function() {
