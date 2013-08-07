@@ -1,4 +1,4 @@
-# Map development
+# Maps development
 
 You will need node.js version >= 0.8
 
