@@ -42,7 +42,6 @@
 		 ng-show="is_show_search && !is_show_nav">
 			<form>
 				<input name="query" placeholder="Search a place"
-					map-auto-complete sourcedata="search_complete_source"
 					ng-model="search_keyword" autocomplete="off" type="search">
 				<button ng-click="searchByAddress()"> Search </button>
 			</form>
