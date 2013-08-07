@@ -2,7 +2,7 @@
 
 'use strict';
 
-angular.module('Map', ['OC', 'leaflet-directive']).
+angular.module('Maps', ['OC', 'leaflet-directive']).
 	config(
 		['$routeProvider', '$interpolateProvider',
 		function ($routeProvider, $interpolateProvider) {
@@ -22,7 +22,7 @@ angular.module('Map', ['OC', 'leaflet-directive']).
 	$interpolateProvider.endSymbol(']]');
 }]);
 
-angular.module('Map').controller('CollectionController',
+angular.module('Maps').controller('CollectionController',
 	['$scope', '$rootScope', 'CollectionBussinessLayer',
 function ($scope, $rootScope, CollectionBussinessLayer) {
 	var collection_bl = CollectionBussinessLayer;
@@ -34,8 +34,8 @@ function ($scope, $rootScope, CollectionBussinessLayer) {
 	});
 }]);
 
-angular.module('Map').controller('MainController',
-	['$scope', '$rootScope', '$routeParams', '$http',
+angular.module('Maps').controller('MainController',
+['$scope', '$rootScope', '$routeParams', '$http',
 function ($scope, $rootScope, $routeParams, $http) {
 	$scope.is_show_nav = false;
 	$scope.is_show_search = false;
@@ -54,6 +54,9 @@ function ($scope, $rootScope, $routeParams, $http) {
 		$scope.is_show_search = !$scope.is_show_search;
 	};
 
+	$scope.$watch('search_keyword', function (newval) {
+	});
+
 	$scope.searchByAddress = function () {
 		var address = $scope.search_keyword;
 		if (address !== '') {
@@ -61,6 +64,9 @@ function ($scope, $rootScope, $routeParams, $http) {
 				'format=json' + '&q=' + address;
 			$http({method: 'GET', url: req_url}).
 				success(function (data, status) {
+					for (var i in data) {
+						console.log(data[i]);
+					}
 					var first_re = data[0];
 					var boundingbox = first_re.boundingbox;
 					var south_west = {
@@ -87,9 +93,11 @@ function ($scope, $rootScope, $routeParams, $http) {
 			$rootScope.$broadcast('cleanCollection');
 		}
 	};
+
+	$scope.search_complete_source = ['abc', 'cba'];
 }]);
 
-angular.module('Map').controller('MapController',
+angular.module('Maps').controller('MapController',
 ['$scope', '$rootScope',
 function ($scope, $rootScope) {
 	$scope.defaults = {
@@ -137,7 +145,7 @@ function ($scope, $rootScope) {
 
 }]);
 
-angular.module('Map').controller('MarkerPanelController',
+angular.module('Maps').controller('MarkerPanelController',
 ['$scope', '$rootScope', '$routeParams', '$http', 'CollectionBussinessLayer',
 'PointBusinessLayer',
 function ($scope, $rootScope, $routeParams, $http, CollectionBussinessLayer,
@@ -153,7 +161,7 @@ PointBusinessLayer) {
 	};
 
 	popupInit();
-	$scope.is_show_main_marker_panel = true;
+	//$scope.is_show_main_marker_panel = true;
 
 	$scope.$on('ocMapMainMarkerClick', function(event, main_marker) {
 		$scope.is_show_main_marker_panel = !$scope.is_show_main_marker_panel;
@@ -169,6 +177,10 @@ PointBusinessLayer) {
 
 	$scope.showAddMainMarkerForm = function() {
 		$scope.is_show_add_main_marker_form = true;
+	};
+
+	$scope.hideAddMainMarkerForm = function() {
+		$scope.is_show_add_main_marker_form = false;
 	};
 
 	$scope.submitAddMainMarkerForm = function() {
@@ -199,7 +211,7 @@ PointBusinessLayer) {
 	};
 }]);
 
-angular.module('Map').controller('PointController',
+angular.module('Maps').controller('PointController',
 ['$scope', '$rootScope', 'PointBusinessLayer',
 function ($scope, $rootScope, PointBusinessLayer) {
 	var point_bl = PointBusinessLayer;
@@ -219,7 +231,27 @@ function ($scope, $rootScope, PointBusinessLayer) {
 
 }]);
 
-angular.module('Map').factory('CollectionBussinessLayer',
+angular.module('Maps').directive('mapAutoComplete',
+['$rootScope',
+function ($rootScope) {
+	return {
+		restrict: 'A',
+		scope: {
+			sourcedata: '=sourcedata',
+		},
+		link: function ($scope, elem, attrs) {
+			$scope.$watch('sourcedata', function(newval, oldval) {
+				console.log(newval);
+				$(elem).autocomplete({
+					source: newval
+				});
+			});
+		}
+	};
+}]);
+
+
+angular.module('Maps').factory('CollectionBussinessLayer',
 ['$rootScope',
 function ($rootScope) {
 	var active_collection = null;
@@ -262,7 +294,7 @@ function ($rootScope) {
 	return cbl;
 }]);
 
-angular.module('Map').factory('PointBusinessLayer',
+angular.module('Maps').factory('PointBusinessLayer',
 ['PointModel',
 function (PointModel) {
 	var pbl = {};
@@ -278,7 +310,7 @@ function (PointModel) {
 	return pbl;
 }]);
 
-angular.module('Map').factory('PointModel',
+angular.module('Maps').factory('PointModel',
 [
 function () {
 	var points = {
@@ -335,7 +367,7 @@ function () {
 	return pmodel;
 }]);
 
-angular.module('Map').factory('Publisher',
+angular.module('Maps').factory('Publisher',
 ['_Publisher', 'PointModel',
 function (_Publisher, PointModel) {
 	publisher = new _Publisher();

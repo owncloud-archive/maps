@@ -1,10 +1,10 @@
 <?php
 
 /**
- * ownCloud - Map app
- * 
+ * ownCloud - Maps app
+ *
  * @author Qingping Hou
- * 
+ *
  * @copyright 2013 Qingping Hou <qingping.hou@gmail.com>
  *
  * This library is free software; you can redistribute it and/or
@@ -23,7 +23,7 @@
  */
 
 
-namespace OCA\Map\Controller;
+namespace OCA\Maps\Controller;
 
 use OCA\AppFramework\Controller\Controller;
 

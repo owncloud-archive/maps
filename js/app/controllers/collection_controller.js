@@ -1,5 +1,5 @@
 /**
- * ownCloud - Map app
+ * ownCloud - Maps app
  *
  * @author Qingping Hou
  *
@@ -21,7 +21,7 @@
  */
 
 
-angular.module('Map').controller('CollectionController',
+angular.module('Maps').controller('CollectionController',
 	['$scope', '$rootScope', 'CollectionBussinessLayer',
 function ($scope, $rootScope, CollectionBussinessLayer) {
 	var collection_bl = CollectionBussinessLayer;

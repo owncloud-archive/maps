@@ -1,9 +1,9 @@
 
 /**
- * ownCloud - Map app
- * 
+ * ownCloud - Maps app
+ *
  * @author Qingping Hou
- * 
+ *
  * @copyright 2013 Qingping Hou <qingping.hou@gmail.com>
  *
  * This library is free software; you can redistribute it and/or
@@ -27,7 +27,7 @@ describe('MainController', function() {
 	var controller;
 
 	// use the news container
-	beforeEach(module('News'));
+	beforeEach(module('Maps'));
 
 	beforeEach(inject(function ($controller, $rootScope) {
 		controller = $controller('MainController', {

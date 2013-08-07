@@ -1,7 +1,7 @@
 <?php
 
 /**
- * ownCloud - Map app
+ * ownCloud - Maps app
  *
  * @author Qingping Hou
  *
@@ -23,7 +23,7 @@
  */
 
 
-namespace OCA\Map\DependencyInjection;
+namespace OCA\Maps\DependencyInjection;
 
 use \OCA\AppFramework\DependencyInjection\DIContainer as BaseContainer;
 
@@ -32,7 +32,7 @@ class DIContainer extends BaseContainer {
 
 
 	public function __construct(){
-		parent::__construct('map');
+		parent::__construct('maps');
 		require_once __DIR__ . '/diconfig.php';
 	}
 

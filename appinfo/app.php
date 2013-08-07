@@ -1,7 +1,7 @@
 <?php
 
 /**
- * ownCloud - Map app
+ * ownCloud - Maps app
  *
  * @author Qingping Hou
  *
@@ -23,7 +23,7 @@
  */
 
 
-namespace OCA\Map;
+namespace OCA\Maps;
 
 use \OCA\AppFramework\Core\API;
 
@@ -31,7 +31,7 @@ use \OCA\AppFramework\Core\API;
 // dont break owncloud when the appframework is not enabled
 if(\OCP\App::isEnabled('appframework')){
 
-	$api = new API('map');
+	$api = new API('maps');
 
 	// uncomment the next line to activate the admin interface
 	//$api->registerAdmin('admin/settings');
@@ -40,7 +40,7 @@ if(\OCP\App::isEnabled('appframework')){
 	$api->addNavigationEntry(array(
 
 		// the string under which your app will be referenced in owncloud
-		'id' => $api->getAppName('map'),
+		'id' => $api->getAppName('maps'),
 
 		// sorting weight for the navigation. The higher the number, the higher
 		// will it be listed in the navigation
@@ -55,11 +55,11 @@ if(\OCP\App::isEnabled('appframework')){
 
 		// the title of your application. This will be used in the
 		// navigation or on the settings page of your app
-		'name' => $api->getTrans()->t('Map')
+		'name' => $api->getTrans()->t('Maps')
 
 	));
 
 } else {
-	$msg = 'Can not enable the  app because the App Framework App is disabled';
-	\OCP\Util::writeLog('map', $msg, \OCP\Util::ERROR);
+	$msg = 'Can not enable the app because the App Framework App is disabled';
+	\OCP\Util::writeLog('maps', $msg, \OCP\Util::ERROR);
 }

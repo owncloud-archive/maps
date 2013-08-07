@@ -1,6 +1,6 @@
 
 /**
- * ownCloud - Map app
+ * ownCloud - Maps app
  *
  * @author Qingping Hou
  *
@@ -22,7 +22,7 @@
  */
 
 
-angular.module('Map', ['OC', 'leaflet-directive']).
+angular.module('Maps', ['OC', 'leaflet-directive']).
 	config(
 		['$routeProvider', '$interpolateProvider',
 		function ($routeProvider, $interpolateProvider) {

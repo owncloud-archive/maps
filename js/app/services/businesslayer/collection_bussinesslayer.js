@@ -1,6 +1,6 @@
 
 /**
- * ownCloud - Map app
+ * ownCloud - Maps app
  *
  * @author Qingping Hou
  *
@@ -21,7 +21,7 @@
  *
  */
 
-angular.module('Map').factory('CollectionBussinessLayer',
+angular.module('Maps').factory('CollectionBussinessLayer',
 ['$rootScope',
 function ($rootScope) {
 	var active_collection = null;

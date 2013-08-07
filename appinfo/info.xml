@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <info>
-	<id>map</id>
-	<name>Map</name>
-	<description>Map App for ownCloud</description>
+	<id>maps</id>
+	<name>Maps</name>
+	<description>Maps App for ownCloud</description>
 	<licence>AGPLv3</licence>
 	<author>Qingping Hou</author>
 	<version>0.001</version>

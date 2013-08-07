@@ -11,7 +11,7 @@
 {{ style('style') }}
 
 
-<div id="app" ng-app="Map" ng-cloak>
+<div id="app" ng-app="Maps" ng-cloak>
 	<script type="text/ng-template" id="main.html">
 		{% include 'partials/main_view.php' %}
 	</script>
@@ -42,6 +42,7 @@
 		 ng-show="is_show_search && !is_show_nav">
 			<form>
 				<input name="query" placeholder="Search a place"
+					map-auto-complete sourcedata="search_complete_source"
 					ng-model="search_keyword" autocomplete="off" type="search">
 				<button ng-click="searchByAddress()"> Search </button>
 			</form>

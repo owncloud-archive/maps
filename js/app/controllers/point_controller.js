@@ -1,6 +1,6 @@
 
 /**
- * ownCloud - Map app
+ * ownCloud - Maps app
  *
  * @author Qingping Hou
  *
@@ -22,7 +22,7 @@
  */
 
 
-angular.module('Map').controller('PointController',
+angular.module('Maps').controller('PointController',
 ['$scope', '$rootScope', 'PointBusinessLayer',
 function ($scope, $rootScope, PointBusinessLayer) {
 	var point_bl = PointBusinessLayer;

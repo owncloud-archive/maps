@@ -1,6 +1,6 @@
 
 /**
- * ownCloud - Map app
+ * ownCloud - Maps app
  *
  * @author Qingping Hou
  *
@@ -21,7 +21,7 @@
  *
  */
 
-angular.module('Map').factory('Publisher',
+angular.module('Maps').factory('Publisher',
 ['_Publisher', 'PointModel',
 function (_Publisher, PointModel) {
 	publisher = new _Publisher();

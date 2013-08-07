@@ -1,6 +1,6 @@
 
 /**
- * ownCloud - Map app
+ * ownCloud - Maps app
  *
  * @author Qingping Hou
  *
@@ -22,7 +22,7 @@
  */
 
 
-angular.module('Map').controller('MapController',
+angular.module('Maps').controller('MapController',
 ['$scope', '$rootScope',
 function ($scope, $rootScope) {
 	$scope.defaults = {

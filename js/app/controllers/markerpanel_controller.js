@@ -1,5 +1,5 @@
 /**
- * ownCloud - Map app
+ * ownCloud - Maps app
  *
  * @author Qingping Hou
  *
@@ -21,7 +21,7 @@
  */
 
 
-angular.module('Map').controller('MarkerPanelController',
+angular.module('Maps').controller('MarkerPanelController',
 ['$scope', '$rootScope', '$routeParams', '$http', 'CollectionBussinessLayer',
 'PointBusinessLayer',
 function ($scope, $rootScope, $routeParams, $http, CollectionBussinessLayer,

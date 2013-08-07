@@ -1,5 +1,5 @@
 /**
- * ownCloud - Map app
+ * ownCloud - Maps app
  *
  * @author Qingping Hou
  *
@@ -21,8 +21,8 @@
  */
 
 
-angular.module('Map').controller('MainController',
-	['$scope', '$rootScope', '$routeParams', '$http',
+angular.module('Maps').controller('MainController',
+['$scope', '$rootScope', '$routeParams', '$http',
 function ($scope, $rootScope, $routeParams, $http) {
 	$scope.is_show_nav = false;
 	$scope.is_show_search = false;
@@ -41,6 +41,9 @@ function ($scope, $rootScope, $routeParams, $http) {
 		$scope.is_show_search = !$scope.is_show_search;
 	};
 
+	$scope.$watch('search_keyword', function (newval) {
+	});
+
 	$scope.searchByAddress = function () {
 		var address = $scope.search_keyword;
 		if (address !== '') {
@@ -48,6 +51,9 @@ function ($scope, $rootScope, $routeParams, $http) {
 				'format=json' + '&q=' + address;
 			$http({method: 'GET', url: req_url}).
 				success(function (data, status) {
+					for (var i in data) {
+						console.log(data[i]);
+					}
 					var first_re = data[0];
 					var boundingbox = first_re.boundingbox;
 					var south_west = {
@@ -74,4 +80,6 @@ function ($scope, $rootScope, $routeParams, $http) {
 			$rootScope.$broadcast('cleanCollection');
 		}
 	};
+
+	$scope.search_complete_source = ['abc', 'cba'];
 }]);

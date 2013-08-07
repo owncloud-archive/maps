@@ -1,10 +1,10 @@
 <?php
 
 /**
- * ownCloud - Map app
- * 
+ * ownCloud - Maps app
+ *
  * @author Qingping Hou
- * 
+ *
  * @copyright 2013 Qingping Hou <qingping.hou@gmail.com>
  *
  * This library is free software; you can redistribute it and/or
@@ -24,10 +24,10 @@
 
 
 
-namespace OCA\Map\DependencyInjection;
+namespace OCA\Maps\DependencyInjection;
 
-use \OCA\Map\Controller\PageController;
-use \OCA\Map\Controller\SettingsController;
+use \OCA\Maps\Controller\PageController;
+use \OCA\Maps\Controller\SettingsController;
 
 /**
  * Delete the following twig config to use ownClouds default templates
