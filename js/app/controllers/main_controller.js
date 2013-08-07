@@ -56,6 +56,7 @@ function ($scope, $rootScope, $routeParams, $http) {
 				}
 			}).
 				success(function (data, status) {
+					console.log('-----------', data);
 					//for (var i in data) {
 						//console.log(data[i]);
 					//}
