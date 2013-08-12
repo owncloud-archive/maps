@@ -26,6 +26,7 @@ angular.module('Maps').controller('MapController',
 ['$scope', '$rootScope',
 function ($scope, $rootScope) {
 	$scope.defaults = {
+		zoomControlPosition: 'topright',
 		//tileLayer: "http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png",
 		//tileLayerOptions: {
 			//opacity: 0.9,

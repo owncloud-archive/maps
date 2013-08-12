@@ -1,7 +1,7 @@
 <li>
 	<div id="nav-control-group">
 		<a ng-click="hideNavBar()">
-			<i class="icon-circle-arrow-right icon-large"></i>
+			<i class="icon-circle-arrow-left icon-large"></i>
 			<span class="icon-text">hide panel</span>
 		</a>
 	</div>

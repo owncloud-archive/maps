@@ -5,7 +5,7 @@
 {{ script('public/app') }}
 
 {{ script('vendor/leaflet/leaflet') }}
-{{ script('vendor/angular-leaflet/angular-leaflet-directive') }}
+{{ script('vendor/angular-leaflet/angular-leaflet-directive.min') }}
 {{ style('vendor/leaflet/leaflet') }}
 
 {{ style('style') }}
@@ -42,6 +42,7 @@
 		 ng-show="is_show_search && !is_show_nav">
 			<form>
 				<input name="query" placeholder="Search a place"
+					map-auto-complete sourcedata="search_complete_source"
 					ng-model="search_keyword" autocomplete="off" type="search">
 				<button ng-click="searchByAddress()"> Search </button>
 			</form>

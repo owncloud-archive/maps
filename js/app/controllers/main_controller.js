@@ -25,8 +25,8 @@ angular.module('Maps').controller('MainController',
 ['$scope', '$rootScope', '$routeParams', '$http',
 function ($scope, $rootScope, $routeParams, $http) {
 	$scope.is_show_nav = false;
-	$scope.is_show_search = false;
-	//$scope.is_show_search = true;
+	//$scope.is_show_search = false;
+	$scope.is_show_search = true;
 	//$scope.is_show_nav = true;
 
 	$scope.showNavBar = function () {
@@ -56,7 +56,6 @@ function ($scope, $rootScope, $routeParams, $http) {
 				}
 			}).
 				success(function (data, status) {
-					console.log('-----------', data);
 					//for (var i in data) {
 						//console.log(data[i]);
 					//}

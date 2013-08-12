@@ -38,8 +38,8 @@ angular.module('Maps').controller('MainController',
 ['$scope', '$rootScope', '$routeParams', '$http',
 function ($scope, $rootScope, $routeParams, $http) {
 	$scope.is_show_nav = false;
-	$scope.is_show_search = false;
-	//$scope.is_show_search = true;
+	//$scope.is_show_search = false;
+	$scope.is_show_search = true;
 	//$scope.is_show_nav = true;
 
 	$scope.showNavBar = function () {
@@ -106,6 +106,7 @@ angular.module('Maps').controller('MapController',
 ['$scope', '$rootScope',
 function ($scope, $rootScope) {
 	$scope.defaults = {
+		zoomControlPosition: 'topright',
 		//tileLayer: "http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png",
 		//tileLayerOptions: {
 			//opacity: 0.9,
