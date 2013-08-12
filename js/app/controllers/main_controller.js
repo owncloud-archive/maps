@@ -49,16 +49,16 @@ function ($scope, $rootScope, $routeParams, $http) {
 		if (address !== '') {
 			$http({
 				method: 'GET',
-				url: '//open.mapquestapi.com/nominatim/v1/search',
+				url: 'https://open.mapquestapi.com/nominatim/v1/search',
 				params: {
 					'format': 'json',
 					'q': address,
 				}
 			}).
 				success(function (data, status) {
-					//for (var i in data) {
-						//console.log(data[i]);
-					//}
+					for (var i in data) {
+						console.log(data[i]);
+					}
 					var first_re = data[0];
 					var boundingbox = first_re.boundingbox;
 					var south_west = {

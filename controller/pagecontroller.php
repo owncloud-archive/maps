@@ -48,7 +48,14 @@ class PageController extends Controller {
 	 * @CSRFExemption
 	 */
 	public function index() {
-		return $this->render('main');
+		$csp_array = array(
+			'default-src \'self\' https://open.mapquestapi.com;',
+			'script-src \'self\' \'unsafe-eval\';',
+			'style-src \'self\' \'unsafe-inline\';',
+			'frame-src *; img-src *; font-src \'self\' data:; media-src *));'
+		);
+		return $this->render('main', array(), 'user',
+			array('Content-Security-Policy' => implode(' ', $csp_array)));
 	}
 
 
