@@ -35,8 +35,8 @@ function ($scope, $rootScope, CollectionBussinessLayer) {
 }]);
 
 angular.module('Maps').controller('MainController',
-['$scope', '$rootScope', '$routeParams', '$http',
-function ($scope, $rootScope, $routeParams, $http) {
+['$scope', '$rootScope', '$routeParams', '$http', 'MapQuest',
+function ($scope, $rootScope, $routeParams, $http, MapQuest) {
 	$scope.is_show_nav = false;
 	//$scope.is_show_search = false;
 	$scope.is_show_search = true;
@@ -54,48 +54,13 @@ function ($scope, $rootScope, $routeParams, $http) {
 		$scope.is_show_search = !$scope.is_show_search;
 	};
 
-	$scope.$watch('search_keyword', function (newval) {
-	});
-
 	$scope.searchByAddress = function () {
 		var address = $scope.search_keyword;
-		if (address !== '') {
-			$http({
-				method: 'GET',
-				url: '//open.mapquestapi.com/nominatim/v1/search',
-				params: {
-					'format': 'json',
-					'q': address,
-				}
-			}).
+		if (address && address !== '') {
+			MapQuest.search(address).
 				success(function (data, status) {
-					//for (var i in data) {
-						//console.log(data[i]);
-					//}
-					var first_re = data[0];
-					var boundingbox = first_re.boundingbox;
-					var south_west = {
-						lat: parseFloat(boundingbox[0]),
-						lng: parseFloat(boundingbox[2])
-					};
-					var north_east = {
-						lat: parseFloat(boundingbox[1]),
-						lng: parseFloat(boundingbox[3])
-					};
-					// broadcast event for map controller
-					$rootScope.$broadcast('updateFocus', {
-						'coordinate': {
-							'lat': parseFloat(first_re.lat),
-							'lng': parseFloat(first_re.lon),
-						},
-						'bounds': {
-							southWest: south_west,
-							northEast: north_east,
-						},
-					});
+					$rootScope.$broadcast('searchSuccess', data);
 				});
-
-			$rootScope.$broadcast('cleanCollection');
 		}
 	};
 
@@ -237,25 +202,46 @@ function ($scope, $rootScope, PointBusinessLayer) {
 
 }]);
 
-angular.module('Maps').directive('mapAutoComplete',
-['$rootScope',
-function ($rootScope) {
-	return {
-		restrict: 'A',
-		scope: {
-			sourcedata: '=sourcedata',
-		},
-		link: function ($scope, elem, attrs) {
-			$scope.$watch('sourcedata', function(newval, oldval) {
-				console.log(newval);
-				$(elem).autocomplete({
-					source: newval
-				});
-			});
-		}
-	};
-}]);
+angular.module('Maps').controller('SearchResultController',
+['$scope', '$rootScope',
+function ($scope, $rootScope) {
+	$rootScope.$on('searchSuccess', function(ev, data) {
+		$scope.search_results = data;
+		$scope.is_show_search_result_panel = true;
+	});
 
+	$scope.focusToPlace = function(pdata) {
+		var boundingbox = pdata.boundingbox;
+		var south_west = {
+			lat: parseFloat(boundingbox[0]),
+			lng: parseFloat(boundingbox[2])
+		};
+		var north_east = {
+			lat: parseFloat(boundingbox[1]),
+			lng: parseFloat(boundingbox[3])
+		};
+		// broadcast event for map controller
+		$rootScope.$broadcast('updateFocus', {
+			'coordinate': {
+				'lat': parseFloat(pdata.lat),
+				'lng': parseFloat(pdata.lon),
+			},
+			'bounds': {
+				southWest: south_west,
+				northEast: north_east,
+			},
+		});
+		$rootScope.$broadcast('cleanCollection');
+		$scope.is_show_search_result_panel = false;
+	};
+
+	$scope.closeSearchResultPanel = function() {
+		$scope.is_show_search_result_panel = false;
+	};
+
+
+	$scope.is_show_search_result_panel = false;
+}]);
 
 angular.module('Maps').factory('CollectionBussinessLayer',
 ['$rootScope',
@@ -314,6 +300,25 @@ function (PointModel) {
 	};
 
 	return pbl;
+}]);
+
+angular.module('Maps').factory('MapQuest',
+['$http',
+function ($http) {
+	var mq_obj = {};
+
+	mq_obj.search = function(address) {
+		return $http({
+			method: 'GET',
+				url: 'https://open.mapquestapi.com/nominatim/v1/search',
+				params: {
+					'format': 'json',
+					'q': address,
+				}
+		});
+	};
+
+	return mq_obj;
 }]);
 
 angular.module('Maps').factory('PointModel',

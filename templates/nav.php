@@ -21,7 +21,6 @@
 	</ul>
 </li>
 
-
 <li class="open" ng-controller="PointController">
 	<a ng-click="">Current points</a>
 	<ul>

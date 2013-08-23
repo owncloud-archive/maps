@@ -1,5 +1,5 @@
 <div ng-controller="MarkerPanelController">
-	<div id="main-marker-panel" class="map-hover"
+	<div id="main-marker-panel" class="map-hover map-hover-center map-hover-panel"
      ng-show="is_show_main_marker_panel"
      oc-draggable>
 		<a class="panel-close-button" ng-click="closeMainMarkerPanel()">
@@ -48,6 +48,22 @@
 		</div>
 	</div>
 </div>
+
+
+
+<div ng-controller="SearchResultController" ng-show="is_show_search_result_panel"
+  id="search-result-panel" class="map-hover map-hover-center map-hover-panel">
+	<a class="panel-close-button" ng-click="closeSearchResultPanel()">
+		<i class="icon-remove icon-large"></i>
+	</a>
+
+	<h2>Please select your destination</h2>
+
+	<div ng-repeat="re in search_results">
+		<a ng-click="focusToPlace(re)">[[ re.display_name ]]</a>
+	</div>
+</div>
+
 
 <div ng-controller="MapController">
 	<leaflet

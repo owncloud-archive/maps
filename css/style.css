@@ -5,11 +5,33 @@
 	z-index: 0;
 }
 
+/* map hover related style */
+
 .map-hover {
 	position: absolute;
 	opacity: 0.8;
 	z-index: 10;
 }
+
+.map-hover-center {
+	width: 500px;
+	margin-left: -250px;
+}
+
+.map-hover-panel {
+	top: 10%;
+	left: 50%;
+	background: #FFF;
+	border-radius: 10px;
+	padding: 20px;
+}
+
+.map-hover-panel h2 {
+	margin: 5px 0;
+	font-size: 1.5em;
+	font-weight: bold;
+}
+
 
 #app-navigation {
 	position: absolute;
@@ -74,12 +96,9 @@
 }
 
 #main-marker-panel {
-	padding: 20px;
-	border-radius: 10px;
-	top: 10%;
-	left: 50%;
-	width: 500px;
-	margin-left: -250px;
-	background: #FFF;
 	z-index: 1000;
+}
+
+#search-result-panel a {
+	text-decoration: underline;
 }

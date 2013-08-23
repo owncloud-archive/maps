@@ -41,10 +41,11 @@
 		<div id="search-bar" class="map-hover"
 		 ng-show="is_show_search && !is_show_nav">
 			<form>
-				<input name="query" placeholder="Search a place"
-					ng-model="search_keyword" autocomplete="off" type="search">
+				<input type="search" placeholder="Search a place" autocomplete="off" ng-model="search_keyword"/>
+
 				<button ng-click="searchByAddress()"> Search </button>
 			</form>
+			<!--<map-search></map-search>-->
 		</div>
 
 		<div id="app-content" ng-view></div>
