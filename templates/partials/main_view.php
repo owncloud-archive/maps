@@ -51,7 +51,7 @@
 
 
 
-<div ng-controller="SearchResultController" ng-show="is_show_search_result_panel"
+<div ng-controller="SearchResultController" ng-show="is_show_search_result_panel" oc-draggable
   id="search-result-panel" class="map-hover map-hover-center map-hover-panel">
 	<a class="panel-close-button" ng-click="closeSearchResultPanel()">
 		<i class="icon-remove icon-large"></i>
