@@ -21,7 +21,7 @@
     "grunt-wrap": "*",
     "phantomjs": "*",
     "grunt-phpunit": "*",
-    "grunt-bower-task": "~0.2.3"
+    "grunt-bower-task": "0.3.4"
   },
   "engine": "node >= 0.8"
 }

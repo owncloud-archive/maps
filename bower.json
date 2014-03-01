@@ -7,13 +7,12 @@
 	],
 	"dependencies": {
 		"font-awesome": "*",
-		"leaflet": "*",
-		"angular-leaflet": "0.5.1"
+		"angular-leaflet": "0.7.5"
 	},
 	"exportsOverride": {
 		"font-awesome": {
 			"css": "css/*.css",
-			"font": "font/*"
+			"fonts": "fonts/*"
 		},
 		"leaflet": {
 			"js": "dist/**/*.js",

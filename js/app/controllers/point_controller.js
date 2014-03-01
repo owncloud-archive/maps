@@ -31,7 +31,7 @@ function ($scope, $rootScope, PointBusinessLayer) {
 
 	$scope.$on('setCollectionActive', function (event, collection_name) {
 		if (collection_name === null) {
-			$scope.active_points = {};
+			$scope.active_points = null;
 		} else {
 			$scope.active_points = point_bl.getPointsByCollection(collection_name);
 		}

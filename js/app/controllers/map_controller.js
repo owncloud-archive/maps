@@ -25,6 +25,8 @@
 angular.module('Maps').controller('MapController',
 ['$scope', '$rootScope',
 function ($scope, $rootScope) {
+	var main_marker_key = '_main_marker';
+
 	$scope.defaults = {
 		zoomControlPosition: 'topright',
 		//tileLayer: "http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png",
@@ -43,14 +45,16 @@ function ($scope, $rootScope) {
 
 	$scope.bounds = [];
 
-	$scope.markers = {};
-
 	$scope.main_marker = {
 		lat: 51.405,
 		lng: -0.09,
 		focus: true,
 		draggable: true,
+		enable: ['click'],
 	};
+
+	$scope.markers = {};
+	$scope.markers[main_marker_key] = $scope.main_marker;
 
 	$scope.$on('updateFocus', function (event, message) {
 		var coordinate = message.coordinate;
@@ -62,11 +66,17 @@ function ($scope, $rootScope) {
 	});
 
 	$scope.$on('displayMultiMarkers', function (event, markers) {
+		if (!markers) {
+			// we show main marker again if collection is cleared
+			markers = {};
+			markers[main_marker_key] = $scope.main_marker;
+		}
 		$scope.markers = markers;
 	});
 
-	$scope.$on('leafletDirectiveMainMarkerClick', function() {
-		$rootScope.$broadcast('ocMapMainMarkerClick', $scope.main_marker);
+	$scope.$on('leafletDirectiveMarker.click', function(ev, marker) {
+		if (marker.markerName == main_marker_key)
+			$rootScope.$broadcast('ocMapMainMarkerClick', $scope.main_marker);
 	});
 
 }]);
