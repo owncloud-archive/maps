@@ -20,12 +20,12 @@
 		<div id="nav-toggle" class="map-hover">
 			<div class="nav-toggle-icon"
 			 ng-click="toggleSearchBar()" ng-show="!is_show_nav">
-				<i class="icon-search icon-2x"></i>
+				<i class="fa fa-search fa-2x"></i>
 			</div>
 
 			<div class="nav-toggle-icon"
 			 ng-click="showNavBar()" ng-show="!is_show_nav">
-				<i class="icon-bookmark icon-2x"></i>
+				<i class="fa fa-bookmark fa-2x"></i>
 			</div>
 		</div>
 
