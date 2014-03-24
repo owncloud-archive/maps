@@ -49,9 +49,9 @@ module.exports = function(grunt) {
 					install: true,
 					verbose: true,
 					layout: function(type, component) {
-						if (type == 'img' && component == 'leaflet') {
+						if (type == 'img' && component == 'leaflet-dist') {
 							// put leaflet images with css files
-							return 'js/vendor/leaflet/images';
+							return 'js/vendor/leaflet-dist/images';
 						} else if (type == 'fonts' && component == 'font-awesome') {
 							return 'css/vendor/fonts';
 						} else {

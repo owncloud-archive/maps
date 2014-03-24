@@ -14,10 +14,10 @@
 			"css": "css/*.css",
 			"fonts": "fonts/*"
 		},
-		"leaflet": {
-			"js": "dist/**/*.js",
-			"css": "dist/**/*.css",
-			"img": "dist/images/*.png"
+		"leaflet-dist": {
+			"js": "*.js",
+			"css": "*.css",
+			"img": "images/*.png"
 		},
 		"angular-leaflet": {
 			"js": "dist/*.js"
