@@ -10,6 +10,9 @@
 \OCP\Util::addScript('maps', '3rdparty/leaflet/plugins/leaflet.select-layers.min');
 \OCP\Util::addScript('maps', '3rdparty/leaflet/plugins/leaflet-compass.min');
 
+// from git@github.com:stefanocudini/leaflet-gps.git
+\OCP\Util::addScript('maps', '3rdparty/leaflet-gps/leaflet-gps.min');
+
 
 
 \OCP\Util::addScript('maps', 'script');
@@ -19,6 +22,9 @@
 
 \OCP\Util::addStyle('maps', 'leaflet/leaflet-routing-machine');
 \OCP\Util::addStyle('maps', 'style');
+
+// from git@github.com:stefanocudini/leaflet-gps.git, folder structure adapted for OC
+\OCP\Util::addStyle('maps', 'leaflet-gps/css/leaflet-gps.min');
 
 
 ?>

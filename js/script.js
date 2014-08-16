@@ -115,6 +115,7 @@ Array.prototype.unique = function() {
 		});
 		map.on('locationfound', onLocationFound);
 		//map.addControl( new L.Control.Compass() );
+		map.addControl( new L.Control.Gps() );
 		$('.leaflet-control-layers-overlays').removeProp('multiple');
 
 		L.Routing.control({
