@@ -294,6 +294,21 @@ Array.prototype.unique = function() {
 		}, function() {
 			toolKit.removeFavMarkers()
 		});
+		
+		$('.trackLayer').clickToggle(function() {
+			$.getJSON(OC.generateUrl('/apps/maps/getgps'), null, function parseGpxFiles(r) {
+				var layerArr = new Array(r.length);
+				for(i=0; i<r.length; i++){
+					var track = r[i];
+					var trackUrl = OC.generateUrl('apps/files/ajax/download.php?dir={dir}&files={file}', {
+						dir: track.dir,
+						file: track.file
+					})
+					layerArr[i] = omnivore.gpx(trackUrl).addTo(map)
+				}
+			})
+		});
+		
 		$(document).on('click', '.subLayer', function() {
 			var layerGroup = $(this).attr('data-layerGroup');
 			var layerValue = $(this).attr('data-layerValue');
@@ -762,17 +777,6 @@ Array.prototype.unique = function() {
 		},
 
 		loadContacts : function() {
-			$.getJSON(OC.generateUrl('/apps/maps/getgps'), null, function parseGpxFiles(r) {
-				var layerArr = new Array(r.length);
-				for(i=0; i<r.length; i++){
-					var track = r[i];
-					var trackUrl = OC.generateUrl('apps/files/ajax/download.php?dir={dir}&files={file}', {
-						dir: track.dir,
-						file: track.file
-					})
-					layerArr[i] = omnivore.gpx(trackUrl).addTo(map)
-				}
-			})
 			Maps.tempArr = [];
 			Maps.tempTotal = 0;
 			Maps.tempCounter = 0;

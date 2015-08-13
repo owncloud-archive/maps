@@ -37,11 +37,11 @@
 
 
 ?>
- 
+
 <div id="app">
 	<div id="app-navigation">
 		<div id="searchContainer">
-				
+
 		</div>	<br />
 		<ul class="with-icon">
 			<?php if(\OCP\App::isEnabled('contacts')) : ?>
@@ -51,6 +51,9 @@
 			<?php endif; ?>
 			<li>
 				<a class='photoLayer icon-link' id='photoMenu' data-layer="photos">Photos</a>
+            </li>
+            <li>
+				<a class='trackLayer icon-contacts-dark' data-layer="tracks">Show GPX-Tracks</a>
 			</li>
 			<li>
 				<a class='main-cat-layer icon-info toggle-children' data-layer="amenity">Amenity</a>
@@ -75,7 +78,7 @@
 				</ul>
 			</li>
 		</ul>
-		
+
 		<?php if(\OCP\App::isEnabled('contacts')) : ?>
 		<div id="loadingContacts" style="display:none">
 			<div id="progressBar"><div></div></div>
@@ -90,7 +93,7 @@
 					<a id="tracking-settings">Location tracking settings</a>
 			</div>
 		</div>
-	  
+
   	</div>
 	<div id="app-content">
 		<div id="map">
@@ -104,7 +107,7 @@
 	<table id="trackingDevices">
 		<thead><th>Name</th><th>Hash</th></thead>
 		<tbody>
-			
+
 		</tbody>
 	</table>
 </div>
