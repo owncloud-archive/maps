@@ -34,6 +34,7 @@ class Application extends App {
 			return new PageController(
 				$c->query('AppName'), 
 				$c->query('Request'),
+				$c->query('RootFolder'),
 				$c->query('UserId'),
 				$c->query('CacheManager'),
 				$c->query('LocationManager')
@@ -57,6 +58,10 @@ class Application extends App {
 			return new LocationManager(
 				$c->query('ServerContainer')->getDb()
 			);
+		});
+		
+		$container->registerService('RootFolder', function($c) {
+			return $this->getContainer()->getServer()->getRootFolder();
 		});
 
 		/**
