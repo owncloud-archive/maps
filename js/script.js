@@ -295,18 +295,43 @@ Array.prototype.unique = function() {
 			toolKit.removeFavMarkers()
 		});
 		
-		$('.trackLayer').clickToggle(function() {
-			$.getJSON(OC.generateUrl('/apps/maps/getgps'), null, function parseGpxFiles(r) {
-				var layerArr = new Array(r.length);
-				for(i=0; i<r.length; i++){
-					var track = r[i];
-					var trackUrl = OC.generateUrl('apps/files/ajax/download.php?dir={dir}&files={file}', {
-						dir: track.dir,
-						file: track.file
+		$(document).on('click', '.trackOptions', function() {
+			var layerGroup = $(this).attr('data-layerGroup');
+			var layerValue = $(this).attr('data-layerValue');
+			if(layerGroup != "tracks") return;
+			switch(layerValue){
+				case "load":
+					$.getJSON(OC.generateUrl('/apps/maps/getgps'), null, function parseGpxFiles(r) {
+						for(i=0; i<r.length; i++){
+							var track = r[i];
+							var trackUrl = OC.generateUrl('apps/files/ajax/download.php?dir={dir}&files={file}', {
+								dir: track.dir,
+								file: track.file
+							})
+							omnivore.gpx(trackUrl).addTo(map)
+						}
 					})
-					layerArr[i] = omnivore.gpx(trackUrl).addTo(map)
-				}
-			})
+					break;
+				case "choose":
+					OC.dialogs.filepicker("Select your GPX files", function addGpxFiles(path){
+						for(i=0; i<path.length; i++){
+							var p = path[i];
+							if(p.indexOf('/') === 0) p = p.substr(1);
+							var separator = p.lastIndexOf('/');
+							var dir = p.substr(0, separator);
+							var file = p.substr(separator + 1);
+							var trackUrl = OC.generateUrl('apps/files/ajax/download.php?dir={dir}&files={file}', {
+								dir: dir,
+								file: file
+							})
+							omnivore.gpx(trackUrl).addTo(map)
+						}
+					}, true, "application/octet-stream", true);
+					break;
+				case "upload":
+					alert("upload");
+					break;
+			}
 		});
 		
 		$(document).on('click', '.subLayer', function() {

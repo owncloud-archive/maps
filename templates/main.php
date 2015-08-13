@@ -53,7 +53,12 @@
 				<a class='photoLayer icon-link' id='photoMenu' data-layer="photos">Photos</a>
             </li>
             <li>
-				<a class='trackLayer icon-contacts-dark' data-layer="tracks">Show GPX-Tracks</a>
+				<a class='trackLayer icon-link toggle-children' data-layer="tracks">Show GPX-Tracks</a>
+				<ul id="track-options" class="hidden">
+					<li><a class="trackOptions" data-layerGroup="tracks" data-layerValue="load">Load from MyTracks folder</a></li>
+					<li><a class="trackOptions" data-layerGroup="tracks" data-layerValue="choose">Choose from files App</a></li>
+					<li><a class="trackOptions" data-layerGroup="tracks" data-layerValue="upload">Upload GPX File</a></li>
+				</ul>
 			</li>
 			<li>
 				<a class='main-cat-layer icon-info toggle-children' data-layer="amenity">Amenity</a>
