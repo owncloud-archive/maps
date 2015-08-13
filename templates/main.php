@@ -47,6 +47,9 @@
 			</li>
 			<?php endif; ?>
 			<li>
+				<a class='trackLayer icon-contacts-dark' data-layer="tracks">Show GPX-Tracks</a>
+			</li>
+			<li>
 				<a class='main-cat-layer icon-info toggle-children' data-layer="amenity">Amenity</a>
 				<ul id="amenity-items" class="hidden"></ul>
 			</li>
