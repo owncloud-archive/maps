@@ -15,17 +15,21 @@ use \OCP\IRequest;
 use \OCP\AppFramework\Http\TemplateResponse;
 use \OCP\AppFramework\Controller;
 use \OCA\Maps\Db\CacheManager;
+use \OCP\Files\Folder;
+use \OCP\Files\IRootFolder;
 
 class PageController extends Controller {
 
 	private $userId;
 	private $cacheManager;
 	private $locationManager;
-	public function __construct($appName, IRequest $request, $userId, $cacheManager,$locationManager) {
+	private $rootF;
+	public function __construct($appName, IRequest $request, $rootF, $userId, $cacheManager,$locationManager) {
 		parent::__construct($appName, $request);
 		$this -> userId = $userId;
 		$this -> cacheManager = $cacheManager;
 		$this -> locationManager = $locationManager;
+		$this -> rootF = $rootF;
 	}
 
 	/**
@@ -229,4 +233,26 @@ class PageController extends Controller {
 
 	}
 
+	public function getGpsFiles(){
+		$path = '/' . $this->userId . '/files/MyTracks';
+		if ($this->rootF->nodeExists($path)) {
+			$folder = $this->rootF->get($path);
+		} else {
+			$folder = $this->rootF->newFolder($path);
+		}
+		$nodes = $folder->getDirectoryListing();
+		$suffix = ".gpx";
+		foreach($nodes as $n){
+			if($n->getType() == \OCP\Files\FileInfo::TYPE_FILE){
+				$name = $n->getName();
+				if(substr_compare($name, $suffix, -strlen($suffix)) === 0){
+					$arr = array();
+					$arr['dir'] = $n->getParent()->getName();
+					$arr['file'] = $n->getName();
+					$files[] = $arr;
+				}
+			}
+		}
+		return $files;
+	}
 }

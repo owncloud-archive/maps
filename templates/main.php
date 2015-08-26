@@ -21,6 +21,7 @@
 \OCP\Util::addStyle('maps', 'awsome-markers/leaflet.awesome-markers');
 \OCP\Util::addScript('maps', '3rdparty/leaflet/plugins/leaflet.awesome-markers.min');
 \OCP\Util::addScript('maps', '3rdparty/leaflet/plugins/Leaflet.MakiMarkers');
+\OCP\Util::addScript('maps', '3rdparty/leaflet/plugins/leaflet-omnivore');
 \OCP\Util::addScript('maps', 'dateTimePicker');
 \OCP\Util::addScript('maps', 'script');
 
@@ -45,6 +46,14 @@
 				<a class='contactLayer icon-contacts-dark' id='contactMenu' data-layer="contacts">Contacts</a>
 			</li>
 			<?php endif; ?>
+			<li>
+				<a class='trackLayer icon-link toggle-children' data-layer="tracks">Show GPX-Tracks</a>
+				<ul id="track-options" class="hidden">
+					<li><a class="trackOptions" data-layerGroup="tracks" data-layerValue="load">Load from MyTracks folder</a></li>
+					<li><a class="trackOptions" data-layerGroup="tracks" data-layerValue="choose">Choose from files App</a></li>
+					<li><a class="trackOptions" data-layerGroup="tracks" data-layerValue="upload">Upload GPX File</a></li>
+				</ul>
+			</li>
 			<li>
 				<a class='main-cat-layer icon-info toggle-children' data-layer="amenity">Amenity</a>
 				<ul id="amenity-items" class="hidden"></ul>
