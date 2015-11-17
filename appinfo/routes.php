@@ -34,6 +34,6 @@ $application->registerRoutes($this, array('routes' => array(
     array('name' => 'location#remove_device', 'url' => '/api/1.0/location/removedevice', 'verb' => 'POST'),
     array('name' => 'location#load_devices', 'url' => '/api/1.0/location/loadDevices', 'verb' => 'GET'),
     array('name' => 'location#load_locations', 'url' => '/api/1.0/location/loadLocations', 'verb' => 'GET'),
-    array('name' => 'favorite#add_favorite', 'url' => '/api/1.0/favorite/addToFavorites', 'verb' => 'GET'),
+    array('name' => 'favorite#add_favorite', 'url' => '/api/1.0/favorite/addToFavorites', 'verb' => 'POST'),
 
 )));
