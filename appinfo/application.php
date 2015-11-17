@@ -33,7 +33,7 @@ class Application extends App {
 		 */
 		$container->registerService('PageController', function($c) {
 			return new PageController(
-				$c->query('AppName'), 
+				$c->query('AppName'),
 				$c->query('Request'),
 				$c->query('UserId'),
 				$c->query('CacheManager'),
@@ -42,10 +42,18 @@ class Application extends App {
 		});
 		$container->registerService('LocationController', function($c) {
 			return new LocationController(
-				$c->query('AppName'), 
+				$c->query('AppName'),
 				$c->query('Request'),
 				$c->query('LocationMapper'),
 				$c->query('DeviceMapper'),
+				$c->query('UserId')
+			);
+		});
+		$container->registerService('FavoriteController', function($c) {
+			return new LocationController(
+				$c->query('AppName'),
+				$c->query('Request'),
+				$c->query('FavoriteMapper'),
 				$c->query('UserId')
 			);
 		});
@@ -62,6 +70,11 @@ class Application extends App {
 		});
 		$container->registerService('DeviceMapper', function($c) {
 			return new DeviceMapper(
+				$c->query('ServerContainer')->getDb()
+			);
+		});
+		$container->registerService('FavoriteMapper', function($c) {
+			return new FavoriteMapper(
 				$c->query('ServerContainer')->getDb()
 			);
 		});

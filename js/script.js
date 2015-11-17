@@ -1172,9 +1172,23 @@ Array.prototype.unique = function() {
 
 		}
 	}
+
+	favorites = {
+		add : function(){
+			var latlng = $(this).attr("data-latlng").split(",");
+			alert(latlng[0] + " : " + latlng[1]);
+			var formData = {
+				lat : latlng[0],
+				lng : latlng[1]
+			};
+			$.get(OC.generateUrl('/apps/maps/api/1.0/favorite/addToFavorites'), formData);
+		}
+	}
+
 	$(document).on('click', '#tracking-settings', mapSettings.openTrackingSettings);
 	$(document).on('click', '#addtracking button', mapSettings.saveDevice);
 	$(document).on('click', '#trackingDevices .icon-delete', mapSettings.deleteDevice);
+	$(document).on('click', '.addToFav', favorites.add);
 
 	/**
 	 * Extend the OC.Notification object with our own methods
