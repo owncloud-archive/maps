@@ -16,8 +16,10 @@ use \OCP\AppFramework\App;
 use \OCA\Maps\Db\CacheManager;
 use \OCA\Maps\Db\DeviceMapper;
 use \OCA\Maps\Db\LocationMapper;
+use \OCA\Maps\Db\FavoriteMapper;
 use \OCA\Maps\Controller\PageController;
 use \OCA\Maps\Controller\LocationController;
+use \OCA\Maps\Controller\FavoriteController;
 
 
 class Application extends App {
