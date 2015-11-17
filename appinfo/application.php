@@ -52,7 +52,7 @@ class Application extends App {
 			);
 		});
 		$container->registerService('FavoriteController', function($c) {
-			return new LocationController(
+			return new FavoriteController(
 				$c->query('AppName'),
 				$c->query('Request'),
 				$c->query('FavoriteMapper'),
