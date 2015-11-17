@@ -4,7 +4,7 @@ namespace OCA\Maps\Db;
 use OCP\AppFramework\Db\Mapper;
 use OCP\IDBConnection;
 
-class LocationMapper extends Mapper {
+class FavoriteMapper extends Mapper {
 
 	public function __construct(IDBConnection $db) {
 		parent::__construct($db, 'maps_favorites', '\OCA\Maps\Db\Favorite');
