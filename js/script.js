@@ -272,7 +272,7 @@ Array.prototype.unique = function() {
 									popupAnchor : [0, -49],
 									className : 'photo-marker'
 								});
-								
+
 								var markerHTML = '<b>' + file + "</b>";
 								markerHTML += '<br />Latitude: ' + latlon.lat + " " + latDir;
 								markerHTML += '<br />Longitude: ' + latlon.lon + " " + lonDir;
@@ -1181,7 +1181,7 @@ Array.prototype.unique = function() {
 				lat : latlng[0],
 				lng : latlng[1]
 			};
-			$.get(OC.generateUrl('/apps/maps/api/1.0/favorite/addToFavorites'), formData);
+			$.post(OC.generateUrl('/apps/maps/api/1.0/favorite/addToFavorites'), formData);
 		}
 	}
 
@@ -1210,4 +1210,3 @@ Array.prototype.unique = function() {
 		}, timeout);
 	}
 })(jQuery, OC);
-
