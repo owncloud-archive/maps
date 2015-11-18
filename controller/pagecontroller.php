@@ -25,7 +25,6 @@ class PageController extends Controller {
 	private $cacheManager;
 	private $rootF;
 	private $deviceMapper;
-<<<<<<< ad4cb2ae1639f96f4df2c80e19532261da139dfb
 	public function __construct($appName, IRequest $request, $rootF, $userId,
 								CacheManager $cacheManager,
 								DeviceMapper	$deviceMapper) {
