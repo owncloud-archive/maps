@@ -16,19 +16,23 @@ use \OCP\IRequest;
 use \OCP\AppFramework\Http\TemplateResponse;
 use \OCP\AppFramework\Controller;
 use \OCA\Maps\Db\CacheManager;
+use \OCP\Files\Folder;
+use \OCP\Files\IRootFolder;
 
 class PageController extends Controller {
 
 	private $userId;
 	private $cacheManager;
+	private $rootF;
 	private $deviceMapper;
-	public function __construct($appName, IRequest $request, $userId,
+	public function __construct($appName, IRequest $request, $rootF, $userId,
 								CacheManager $cacheManager,
 								DeviceMapper	$deviceMapper) {
 		parent::__construct($appName, $request);
 		$this -> userId = $userId;
 		$this -> cacheManager = $cacheManager;
 		$this -> deviceMapper = $deviceMapper;
+		$this -> rootF = $rootF;
 	}
 
 	/**
@@ -103,7 +107,7 @@ class PageController extends Controller {
 		$kw = $this -> params('search');
 		$bbox = $this -> params('bbox');
 		$response = array('contacts'=>array(),'nodes'=>array(),'addresses'=>array());
-		
+
 		$contacts = $cm -> search($kw, array('FN', 'ADR'));
 		foreach ($contacts as $r) {
 			$data = array();
@@ -123,7 +127,7 @@ class PageController extends Controller {
 			}
 		}
 		//$response['addresses'] = (array)($this->doAdresslookup($kw));
-		
+
 		return $response;
 	}
 
@@ -136,9 +140,9 @@ class PageController extends Controller {
    $lat = $this->params('lat');
    $lng = $this->params('lng');
    $zoom = $this->params('zoom');
-   
+
    $hash = md5($lat.','.$lng.'@'.$zoom);
-   
+
    $checkCache = $this -> checkGeoCache($hash);
   if(!$checkCache){
       $url = 'http://nominatim.openstreetmap.org/reverse/?format=json&email=brantje@gmail.com&lat='.$lat.'&lng='. $lng.'&zoom=67108864';
@@ -151,7 +155,7 @@ class PageController extends Controller {
    }
    echo $response;
    die();
-  } 
+  }
 	/**
 	 * Simply method that posts back the payload of the request
 	 * @NoAdminRequired
@@ -214,7 +218,7 @@ class PageController extends Controller {
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 		curl_setopt($ch, CURLOPT_HEADER, 0);
-    curl_setopt($ch, CURLOPT_TIMEOUT, 900); 
+    curl_setopt($ch, CURLOPT_TIMEOUT, 900);
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 		if ($userAgent) {
 			curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.2) Gecko/20090729 Firefox/3.5.2 GTB5');
@@ -233,4 +237,26 @@ class PageController extends Controller {
 
 	}
 
+	public function getGpsFiles(){
+		$path = '/' . $this->userId . '/files/MyTracks';
+		if ($this->rootF->nodeExists($path)) {
+			$folder = $this->rootF->get($path);
+		} else {
+			$folder = $this->rootF->newFolder($path);
+		}
+		$nodes = $folder->getDirectoryListing();
+		$suffix = ".gpx";
+		foreach($nodes as $n){
+			if($n->getType() == \OCP\Files\FileInfo::TYPE_FILE){
+				$name = $n->getName();
+				if(substr_compare($name, $suffix, -strlen($suffix)) === 0){
+					$arr = array();
+					$arr['dir'] = $n->getParent()->getName();
+					$arr['file'] = $n->getName();
+					$files[] = $arr;
+				}
+			}
+		}
+		return $files;
+	}
 }

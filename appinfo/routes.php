@@ -28,6 +28,7 @@ $application->registerRoutes($this, array('routes' => array(
     array('name' => 'page#adresslookup', 'url' => '/adresslookup', 'verb' => 'GET'),
     array('name' => 'page#geodecode', 'url' => '/geodecode', 'verb' => 'GET'),
     array('name' => 'page#search', 'url' => '/search', 'verb' => 'GET'),
+    array('name' => 'page#getgpsfiles', 'url' => '/getgps', 'verb' => 'GET'),
     
     array('name' => 'location#update', 'url' => '/api/1.0/location/update', 'verb' => 'GET'), 
     array('name' => 'location#add_device', 'url' => '/api/1.0/location/adddevice', 'verb' => 'POST'), 

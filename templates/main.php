@@ -21,6 +21,7 @@
 \OCP\Util::addStyle('maps', 'awsome-markers/leaflet.awesome-markers');
 \OCP\Util::addScript('maps', '3rdparty/leaflet/plugins/leaflet.awesome-markers.min');
 \OCP\Util::addScript('maps', '3rdparty/leaflet/plugins/Leaflet.MakiMarkers');
+\OCP\Util::addScript('maps', '3rdparty/leaflet/plugins/leaflet-omnivore');
 \OCP\Util::addScript('maps', 'dateTimePicker');
 \OCP\Util::addScript('maps', 'script');
 \OCP\Util::addScript('maps', '3rdparty/imageinfo-lib');
@@ -36,11 +37,11 @@
 
 
 ?>
- 
+
 <div id="app">
 	<div id="app-navigation">
 		<div id="searchContainer">
-				
+
 		</div>	<br />
 		<ul class="with-icon">
 			<?php if(\OCP\App::isEnabled('contacts')) : ?>
@@ -50,6 +51,14 @@
 			<?php endif; ?>
 			<li>
 				<a class='photoLayer icon-link' id='photoMenu' data-layer="photos">Photos</a>
+            </li>
+            <li>
+				<a class='trackLayer icon-link toggle-children' data-layer="tracks">Show GPX-Tracks</a>
+				<ul id="track-options" class="hidden">
+					<li><a class="trackOptions" data-layerGroup="tracks" data-layerValue="load">Load from MyTracks folder</a></li>
+					<li><a class="trackOptions" data-layerGroup="tracks" data-layerValue="choose">Choose from files App</a></li>
+					<li><a class="trackOptions" data-layerGroup="tracks" data-layerValue="upload">Upload GPX File</a></li>
+				</ul>
 			</li>
 			<li>
 				<a class='main-cat-layer icon-info toggle-children' data-layer="amenity">Amenity</a>
@@ -74,7 +83,7 @@
 				</ul>
 			</li>
 		</ul>
-		
+
 		<?php if(\OCP\App::isEnabled('contacts')) : ?>
 		<div id="loadingContacts" style="display:none">
 			<div id="progressBar"><div></div></div>
@@ -89,7 +98,7 @@
 					<a id="tracking-settings">Location tracking settings</a>
 			</div>
 		</div>
-	  
+
   	</div>
 	<div id="app-content">
 		<div id="map">
@@ -103,7 +112,7 @@
 	<table id="trackingDevices">
 		<thead><th>Name</th><th>Hash</th></thead>
 		<tbody>
-			
+
 		</tbody>
 	</table>
 </div>

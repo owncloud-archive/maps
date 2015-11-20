@@ -33,8 +33,9 @@ class Application extends App {
 		 */
 		$container->registerService('PageController', function($c) {
 			return new PageController(
-				$c->query('AppName'), 
+				$c->query('AppName'),
 				$c->query('Request'),
+				$c->query('RootFolder'),
 				$c->query('UserId'),
 				$c->query('CacheManager'),
 				$c->query('DeviceMapper')
@@ -42,7 +43,7 @@ class Application extends App {
 		});
 		$container->registerService('LocationController', function($c) {
 			return new LocationController(
-				$c->query('AppName'), 
+				$c->query('AppName'),
 				$c->query('Request'),
 				$c->query('LocationMapper'),
 				$c->query('DeviceMapper'),
@@ -64,6 +65,19 @@ class Application extends App {
 			return new DeviceMapper(
 				$c->query('ServerContainer')->getDb()
 			);
+
+		$container->registerService('RootFolder', function($c) {
+			return $this->getContainer()->getServer()->getRootFolder();
+		});
+
+		/**
+		 * Core
+		 */
+		$container->registerService('UserId', function($c) {
+			return \OCP\User::getUser();
+		});
+		$container->registerService('Db', function() {
+			return new Db();
 		});
 
 	}
