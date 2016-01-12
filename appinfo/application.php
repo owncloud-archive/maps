@@ -65,6 +65,7 @@ class Application extends App {
 			return new DeviceMapper(
 				$c->query('ServerContainer')->getDb()
 			);
+		});
 
 		$container->registerService('RootFolder', function($c) {
 			return $this->getContainer()->getServer()->getRootFolder();
