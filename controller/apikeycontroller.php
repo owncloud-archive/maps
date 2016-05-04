@@ -64,8 +64,14 @@ class ApiKeyController extends ApiController {
 		$apikey->setApiKey($key);
 		$apikey->setUserId($this->userId);
 
-		/* @var $apikey ApiKey */
-		$apikey = $this->apiKeyMapper->insert($apikey);
+        //if there is an existing key, update, insert otherwise
+        try {
+            $oldKey = $this->apiKeyMapper->findByUser($this->userId);
+            $this->updateKey($key, $oldKey->getId());
+        } catch(\OCP\AppFramework\Db\DoesNotExistException $e) {
+            /* @var $apikey ApiKey */
+            $apikey = $this->apiKeyMapper->insert($apikey);
+        }
 
 		$response = array('id'=> $apikey->getId());
 		return new JSONResponse($response);
