@@ -879,8 +879,8 @@ function debounce(func, wait, immediate) {
 					return;
 				}
 				if (contact.location) {
-					if (contact.thumbnail) {
-						var imagePath = contact.thumbnail;
+					if (contact.PHOTO) {
+						var imagePath = contact.PHOTO.replace('VALUE=uri:', '');
 						var iconImage = L.icon({
 							iconUrl : imagePath,
 							iconSize : [42, 49],
@@ -1586,13 +1586,6 @@ function debounce(func, wait, immediate) {
 			var contact = {};
 
 			$.each(vcard.data, function(k, v) {
-				if(vcard.data.photo == true){
-					var uid = vcard.metadata['id'];
-					var parent = vcard.metadata['parent'];
-					var backend = vcard.metadata['backend'];
-					contact.thumbnail = 'apps/contacts/addressbook/' + backend + '/' + parent + '/contact/' + uid + '/photo';
-					contact.thumbnail = OC.generateUrl(contact.thumbnail);
-				}
 				if (v[0]) {
 					if ($.isArray(v[0]['value'])) {
 						if (k === 'ADR') {
@@ -1638,8 +1631,8 @@ function debounce(func, wait, immediate) {
 		currentMarker : null,
 		favMarkers : [],
 		addFavContactMarker : function(contact) {
-			if (contact.thumbnail) {
-				var imagePath = contact.thumbnail
+			if (contact.PHOTO) {
+				var imagePath = contact.PHOTO.replace('VALUE=uri:', '');
 				var iconImage = L.icon({
 					iconUrl : imagePath,
 					iconSize : [42, 49],
