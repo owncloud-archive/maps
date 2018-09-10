@@ -7,3 +7,4 @@ file_filter = <lang>/maps.po
 source_file = templates/maps.pot
 source_lang = en
 type = PO
+
